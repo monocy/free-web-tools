@@ -16,12 +16,13 @@ Google Driveの「Webツール集_spark」のデータ（Webツール一覧.gshe
 
 ## Next actions
 
-1. Run Playwright quality audit (python .ai/tests/playwright_audit.py) to ensure the baseline template functions without console errors or mustache leaks.
+1. Setup, integrate and verify the clock tool (in assets/official/free_web_tools/tools/clock submodule) so it is dynamically registered on the portal, passes smoke tests, and passes playwright quality audit.
 2. Read Drive data index of Webツール集_spark (W:\マイドライブ\Webツール集_spark\Webツール一覧.gsheet) and implement a dynamic list of tools on the index page.
 3. Scaffold initial sub-tools structure as configured in the drive list.
 
 ## Acceptance criteria
 
 - [ ] Playwright quality audit PASS on all routes
+- [ ] Clock tool (tools/clock) is integrated and passes Playwright audit
 - [ ] Read tools catalog list from Drive index and display on portal
 - [ ] Implement dark-mode aesthetic layout with grid list
