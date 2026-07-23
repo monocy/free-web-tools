@@ -17,8 +17,8 @@ export default {
   emits: ['close', 'reset'],
   delimiters: ['[[', ']]'],
   template: `
-    <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" @click.self="$emit('close')" v-cloak>
-      <div class="modal-content w-full max-w-md p-6 rounded-2xl border bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-main)] shadow-2xl relative">
+    <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60" @click.self="$emit('close')" v-cloak>
+      <div class="modal-content w-full max-w-md p-6 rounded-2xl border bg-[var(--bg-primary)] border-[var(--border-color)] text-[var(--text-main)] shadow-2xl relative">
         <h3 class="text-xl font-bold mb-6 flex items-center justify-between">
           <span>[[ t('settings', 'Settings') ]]</span>
           <button @click="$emit('close')" class="text-[var(--text-muted)] hover:text-[var(--text-main)]">
