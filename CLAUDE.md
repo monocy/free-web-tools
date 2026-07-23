@@ -1,50 +1,52 @@
 # Base
-You are highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
+You are a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
 
- ## SYSTEM INFORMATION
-  Operating System: Windows
-  Default Shell: cmd
+## SYSTEM INFORMATION
+- Operating System: Windows
+- Default Shell: powershell (also accept cmd)
 
 # General
 
- ## tasks
-  tasks.md に指示があれば着手
-  実行するタスクは .ai/tasks/2026-07-09 08:03:30_{task_name}.md に記載して完了後に内容と結果を記入する
-  md の1行目には task の [status] {task_name} を記載する
-  完了  :  # [x] {task_name}
-  未完了:  # [] {task_name}
-  tasks_summary.md に日付毎のサマリーを記載する
+## Tasks & Workflow
+1. Read `goal.md` and `tasks.md` first to understand the current task and Objective.
+2. Execute only the first Next action in `goal.md` (one slice at a time).
+3. Do NOT edit the main.py kernel or system/common flask frameworks. Focus changes in `assets/official/free_web_tools/` (flask_routes.py, templates, content) or static files.
+4. Record your run under `.ai/tasks/{{yyyy_mm_dd_hh_mm_ss}}_{{task_name}}.md`
+   - Line 1 MUST be: `# [x] {task_name}` (completed) or `# [] {task_name}` (in_progress).
+5. Append daily lines to `tasks_summary.md`.
+6. Write findings to `.ai/knowledge/*.md` and index them in `.ai/knowledge/index.md`.
 
- ## knowledge
-  知見は必要に応じて .ai/knowledge/*.md から探す
-  新たに得た知見は .ai/knowledge/*.md にまとめる
-  index.md に knowledge ファイルの説明を追記
+## Execution Rules
+- PowerShell: use `;` not `&&`.
+- Change only files inside this repository. Do not edit unrelated trees.
+- No `python -c` — always write a `.py` file to run.
+- CRUD, HTTP requests, and shell commands MUST run via python scripts under `.ai/scripts/`.
+- Never `taskkill /F /IM python.exe`.
+- Never delete protected files: `AGENTS.md`, `goal.md`, `tasks.md`, `README.md`, `start.bat`, `.ai/`.
 
- ## scripts
-  .ai/scripts/*.py ファイルを作成して実行する
-  task md にはどの .py を使用したかを記載する
+## JavaScript (Frontend)
+- No `alert` / `confirm` — use DOM notifications.
+- No npm — use CDN references only.
 
- ## reports
-  レポートや実行結果は .ai/reports/ に出力する
+## Python Environment (Windows)
+Always prefer using the correct embedded python executable:
+```powershell
+E:\Tfiles\Tbox\Python\my_python\python311\python.exe {script_path}
+```
+Or use the local virtual environment:
+```powershell
+.venv\Scripts\python.exe {script_path}
+```
 
- ## rules
-  * 使用可能な command は windows 環境の powershell
-  * && は使用禁止で代わりに ; を使用する
-  * このフォルダ以下以外は変更しない (src/apps/every_search 以下は許可)
-  * unittest, pytest は使用禁止
-  * python -c option は使用禁止。pyファイルを作成して実行する事
-  * ファイル操作(CRUD), HTTP Request, その他コマンドの実行は .ai/scripts/*.py ファイルを作成して python 経由で実行
-  * 動作確認のコードは .ai/tests/*.py を作成して実行
-  * それ以外は .ai/scripts/*.py を作成して実行
-  * README.md があれば読む
-  * python.exe プロセスを一括で強制終了するコマンド (taskkill /F /IM python.exe) 等は禁止
-
- ## .ai/tools
-  各タスクで必要なtoolを .ai/tools/jules に作成
-
-# embed python 環境の実行方法
- ../../../python311/python {file_path}.py
-
-# javascript coding
-  - alert, confirmは使用禁止。DOMで表示する
-  - npm は禁止。jsはCDNで読み込む
+## Jules Self-Correction Loop (CRITICAL)
+Every time you make any route, logic, or markup changes:
+1. You MUST run the local verification tests:
+   ```powershell
+   E:\Tfiles\Tbox\Python\my_python\python311\python.exe .ai/tests/smoke_app.py
+   ```
+   And run Playwright audit checks if available:
+   ```powershell
+   E:\Tfiles\Tbox\Python\my_python\python311\python.exe .ai/tests/playwright_audit.py
+   ```
+2. If any test fails (due to template leakage like `[[` or `}}`, JS runtime exception, undefined/NaN leak, or HTTP 404/500 errors), you MUST automatically inspect the failed files, apply code fixes (e.g. wrap scripts in IIFE, add optional chaining, configure Vue v-cloak), and re-run the tests.
+3. Repeat this check-and-fix loop until all tests PASS successfully before proposing the plan completion or PR.
