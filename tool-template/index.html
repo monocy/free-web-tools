@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Web Tool Template</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neonBlue: '#00f0ff',
+            neonGreen: '#39ff14',
+            neonPurple: '#d300ff',
+            neonRed: '#ff073a',
+            slateDark: '#0b0f19'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* CSS custom variables for reactive theme switcher */
+    :root {
+      --bg-primary: #0b0f19; /* slate-950/slateDark */
+      --bg-card: rgba(15, 23, 42, 0.45);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-glow: rgba(0, 240, 255, 0.2);
+      --accent-color: #00f0ff;
+    }
+    
+    .theme-light {
+      --bg-primary: #f8fafc;
+      --bg-card: rgba(255, 255, 255, 0.65);
+      --border-color: rgba(15, 23, 42, 0.08);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --accent-color: #3b82f6;
+    }
+
+    .theme-neon {
+      --bg-primary: #020205;
+      --bg-card: rgba(0, 0, 0, 0.7);
+      --border-color: rgba(211, 0, 255, 0.25);
+      --text-main: #00f0ff;
+      --text-muted: #8b5cf6;
+      --accent-glow: rgba(211, 0, 255, 0.45);
+      --accent-color: #d300ff;
+    }
+    
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+    }
+    
+    .glass-panel {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+    }
+    
+    .neon-shadow {
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    [v-cloak] { display: none; }
+  </style>
+</head>
+<body class="min-h-screen relative overflow-hidden flex flex-col justify-between" id="theme-root">
+
+  <div id="app" v-cloak class="min-h-screen w-full flex flex-col justify-between relative z-10">
+    
+    <!-- Dynamic Background Image Layer -->
+    <div class="absolute inset-0 pointer-events-none transition-all duration-500 z-0 bg-cover bg-center"
+         :style="{ 
+           backgroundImage: settings.bgUrl ? 'url(' + settings.bgUrl + ')' : 'none',
+           opacity: settings.bgOpacity,
+           filter: 'blur(' + settings.bgBlur + 'px)'
+         }">
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="relative z-10 w-full px-6 py-4 flex justify-between items-center glass-panel border-b">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold shadow-md shadow-cyan-500/20">
+          <i class="fa-solid fa-shapes"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-black tracking-wider uppercase bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            [[ t('tool_title') ]]
+          </h1>
+          <span class="text-[9px] font-bold text-slate-500 font-mono tracking-widest">// STANDALONE TEMPLATE v1.0</span>
+        </div>
+      </div>
+      
+      <!-- Top Action Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Fullscreen Switcher -->
+        <button @click="toggleFullscreen" 
+                class="w-10 h-10 rounded-xl flex items-center justify-center border border-slate-700/50 bg-slate-900/60 text-slate-400 hover:text-white hover:border-cyan-500/40 transition duration-300"
+                :title="isFullscreen ? t('fullscreen_exit') : t('fullscreen_enter')">
+          <i :class="isFullscreen ? 'fa-solid fa-compress' : 'fa-solid fa-expand'"></i>
+        </button>
+        
+        <!-- Settings Gear Toggle Button -->
+        <button @click="isSettingsOpen = true" 
+                class="w-10 h-10 rounded-xl flex items-center justify-center border border-slate-700/50 bg-slate-900/60 text-slate-400 hover:text-white hover:border-cyan-500/40 transition duration-300">
+          <i class="fa-solid fa-gear animate-spin-slow"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="relative z-10 w-full max-w-4xl mx-auto flex-grow flex flex-col items-center justify-center px-6 py-12">
+      <!-- Premium Centerpiece Glass Panel -->
+      <div class="w-full glass-panel p-8 rounded-3xl neon-shadow flex flex-col items-center text-center space-y-6">
+        <div class="w-20 h-20 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-4xl">
+          <i class="fa-solid fa-bolt-lightning"></i>
+        </div>
+        <div class="space-y-2">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            [[ t('tool_title') ]]
+          </h2>
+          <p class="text-sm max-w-md mx-auto" style="color: var(--text-muted);">
+            [[ t('description') ]]
+          </p>
+        </div>
+        
+        <!-- Placeholder Workspace Area (To be replaced by target tool functionality) -->
+        <div class="w-full bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6 text-center space-y-4">
+          <p class="text-xs font-mono tracking-widest text-cyan-500 uppercase">// ACTIVE WORKSPACE PANEL</p>
+          <div class="flex gap-4 justify-center">
+            <button class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-bold hover:shadow-lg hover:shadow-cyan-500/20 transition duration-300">
+              Sample Action
+            </button>
+            <button class="px-5 py-2.5 rounded-xl border border-slate-700 bg-slate-900/40 font-semibold hover:border-slate-500 transition duration-300">
+              Secondary Action
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Controls -->
+    <footer class="relative z-10 w-full px-6 py-4 flex justify-between items-center glass-panel border-t text-xs" style="color: var(--text-muted);">
+      <div>&copy; 2026 Free Web Tools Project.</div>
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-mono uppercase text-[10px]">Active Node</span>
+      </div>
+    </footer>
+
+    <!-- Premium Customizer Settings Overlay Dialog -->
+    <div v-if="isSettingsOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm transition-all duration-300">
+      <div class="w-full max-w-md glass-panel rounded-3xl overflow-hidden shadow-2xl relative">
+        <!-- Dialog Header -->
+        <div class="px-6 py-4 border-b border-slate-800/50 flex justify-between items-center bg-slate-900/40">
+          <div class="flex items-center gap-2 text-cyan-400">
+            <i class="fa-solid fa-sliders"></i>
+            <h3 class="font-bold">[[ t('settings_title') ]]</h3>
+          </div>
+          <button @click="closeSettings" class="text-slate-500 hover:text-white transition duration-200">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+        
+        <!-- Dialog Scrollable Content -->
+        <div class="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+          <!-- 1. Language Toggle -->
+          <div class="space-y-2">
+            <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('lang_label') ]]</label>
+            <div class="grid grid-cols-2 gap-2 bg-slate-950/50 p-1 rounded-xl border border-slate-800">
+              <button @click="settings.lang = 'en'" 
+                      :class="settings.lang === 'en' ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20' : 'text-slate-400 hover:text-white'"
+                      class="py-2 px-3 rounded-lg text-sm transition duration-200">
+                English
+              </button>
+              <button @click="settings.lang = 'ja'" 
+                      :class="settings.lang === 'ja' ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20' : 'text-slate-400 hover:text-white'"
+                      class="py-2 px-3 rounded-lg text-sm transition duration-200">
+                日本語
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Theme Selection -->
+          <div class="space-y-2">
+            <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('theme_label') ]]</label>
+            <div class="grid grid-cols-3 gap-2 bg-slate-950/50 p-1 rounded-xl border border-slate-800">
+              <button @click="setTheme('dark')" 
+                      :class="settings.theme === 'dark' ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20' : 'text-slate-400 hover:text-white'"
+                      class="py-2 px-1 rounded-lg text-xs transition duration-200">
+                [[ t('theme_dark') ]]
+              </button>
+              <button @click="setTheme('light')" 
+                      :class="settings.theme === 'light' ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20' : 'text-slate-400 hover:text-white'"
+                      class="py-2 px-1 rounded-lg text-xs transition duration-200">
+                [[ t('theme_light') ]]
+              </button>
+              <button @click="setTheme('neon')" 
+                      :class="settings.theme === 'neon' ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20' : 'text-slate-400 hover:text-white'"
+                      class="py-2 px-1 rounded-lg text-xs transition duration-200">
+                [[ t('theme_neon') ]]
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. Background Customizer -->
+          <div class="space-y-4 pt-2 border-t border-slate-800/40">
+            <div class="space-y-2">
+              <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('bg_url_label') ]]</label>
+              <input type="text" v-model="settings.bgUrl" placeholder="https://example.com/image.jpg"
+                     class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition">
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('bg_opacity_label') ]]</label>
+                <span class="text-xs font-mono text-cyan-400">[[ Math.round(settings.bgOpacity * 100) ]]%</span>
+              </div>
+              <input type="range" min="0" max="0.8" step="0.05" v-model.number="settings.bgOpacity"
+                     class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('bg_blur_label') ]]</label>
+                <span class="text-xs font-mono text-cyan-400">[[ settings.bgBlur ]]px</span>
+              </div>
+              <input type="range" min="0" max="24" step="1" v-model.number="settings.bgBlur"
+                     class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+            </div>
+          </div>
+        </div>
+
+        <!-- Dialog Footer Action Controls -->
+        <div class="px-6 py-4 border-t border-slate-800/50 flex justify-between bg-slate-900/20">
+          <button @click="resetToDefault" class="text-xs text-rose-400 font-semibold hover:text-rose-300 transition duration-200">
+            <i class="fa-solid fa-rotate-left mr-1"></i> [[ t('reset') ]]
+          </button>
+          <div class="flex gap-2">
+            <button @click="closeSettings" class="px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition duration-200">
+              [[ t('save_settings') ]]
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (() => {
+      const { createApp, ref, reactive, onMounted } = Vue;
+
+      // Default customized setting keys
+      const DEFAULT_SETTINGS = {
+        lang: 'en',
+        theme: 'dark',
+        bgUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop',
+        bgOpacity: 0.15,
+        bgBlur: 8
+      };
+
+      createApp({
+        compilerOptions: { delimiters: ['[[', ']]'] },
+        setup() {
+          const isSettingsOpen = ref(false);
+          const isFullscreen = ref(false);
+          const translations = ref({});
+          const settings = reactive({ ...DEFAULT_SETTINGS });
+
+          // Load translations from local i18n.json
+          const loadTranslations = async () => {
+            try {
+              const res = await fetch('./i18n.json');
+              translations.value = await res.json();
+            } catch (e) {
+              console.error("Failed to load local translations", e);
+            }
+          };
+
+          // Translate helper function
+          const t = (key) => {
+            const currentLang = settings.lang;
+            return translations.value[currentLang]?.[key] || translations.value['en']?.[key] || key;
+          };
+
+          // Theme application logic
+          const applyTheme = (themeName) => {
+            const root = document.getElementById('theme-root');
+            if (!root) return;
+            root.className = 'min-h-screen relative overflow-hidden flex flex-col justify-between';
+            if (themeName === 'light') {
+              root.classList.add('theme-light');
+            } else if (themeName === 'neon') {
+              root.classList.add('theme-neon');
+            }
+          };
+
+          const setTheme = (themeName) => {
+            settings.theme = themeName;
+            applyTheme(themeName);
+            saveSettingsToStorage();
+          };
+
+          // Load configured settings from LocalStorage
+          const loadSettingsFromStorage = () => {
+            const stored = localStorage.getItem('tool-settings');
+            if (stored) {
+              try {
+                const parsed = JSON.parse(stored);
+                Object.assign(settings, parsed);
+              } catch (e) {
+                console.error("Failed to parse stored settings", e);
+              }
+            } else {
+              // Language auto-detection fallback if no stored choice exists
+              const browserLang = navigator.language || '';
+              settings.lang = browserLang.startsWith('ja') ? 'ja' : 'en';
+            }
+            applyTheme(settings.theme);
+          };
+
+          // Save settings to LocalStorage
+          const saveSettingsToStorage = () => {
+            localStorage.setItem('tool-settings', JSON.stringify(settings));
+          };
+
+          const closeSettings = () => {
+            isSettingsOpen.value = false;
+            saveSettingsToStorage();
+          };
+
+          // Reset settings
+          const resetToDefault = () => {
+            Object.assign(settings, DEFAULT_SETTINGS);
+            const browserLang = navigator.language || '';
+            settings.lang = browserLang.startsWith('ja') ? 'ja' : 'en';
+            applyTheme(settings.theme);
+            saveSettingsToStorage();
+          };
+
+          // Fullscreen API toggle
+          const toggleFullscreen = () => {
+            if (!document.fullscreenElement) {
+              document.documentElement.requestFullscreen().then(() => {
+                isFullscreen.value = true;
+              }).catch((err) => {
+                console.error(`Error attempting to enable fullscreen: ${err.message}`);
+              });
+            } else {
+              document.exitFullscreen().then(() => {
+                isFullscreen.value = false;
+              });
+            }
+          };
+
+          // Track changes in fullscreen state via native ESC/controls
+          document.addEventListener('fullscreenchange', () => {
+            isFullscreen.value = !!document.fullscreenElement;
+          });
+
+          onMounted(() => {
+            loadTranslations();
+            loadSettingsFromStorage();
+          });
+
+          return {
+            isSettingsOpen,
+            isFullscreen,
+            settings,
+            t,
+            setTheme,
+            closeSettings,
+            resetToDefault,
+            toggleFullscreen
+          };
+        }
+      }).mount('#app');
+    })();
+  </script>
+</body>
+</html>
