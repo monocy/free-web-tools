@@ -1,5 +1,17 @@
 {
-  "key": "official/web_tools_100x",
-  "entry": "app.py",
-  "dependencies": ["system/flask_server"]
+  "name": "web_tools_100x",
+  "description": "web-tools-100x site routes (Flask gen3)",
+  "package": {
+    "id": "official.web_tools_100x",
+    "version": "0.1.0"
+  },
+  "hosts": {
+    "flask": {
+      "entry": "flask_routes.py",
+      "requires": [
+        "web"
+      ],
+      "prefix": ""
+    }
+  }
 }
