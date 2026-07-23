@@ -98,14 +98,14 @@
     <!-- Header Navigation -->
     <header class="relative z-10 w-full px-6 py-4 flex justify-between items-center glass-panel border-b">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold shadow-md shadow-cyan-500/20">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-[var(--text-main)] text-xl font-bold shadow-md shadow-cyan-500/20">
           <i class="fa-solid fa-shapes"></i>
         </div>
         <div>
           <h1 class="text-lg font-black tracking-wider uppercase bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
             [[ t('tool_title') ]]
           </h1>
-          <span class="text-[9px] font-bold text-slate-500 font-mono tracking-widest">// STANDALONE TEMPLATE v1.0</span>
+          <span class="text-[9px] font-bold text-[var(--text-muted)] font-mono tracking-widest">// STANDALONE TEMPLATE v1.0</span>
         </div>
       </div>
       
@@ -113,14 +113,14 @@
       <div class="flex items-center gap-3">
         <!-- Fullscreen Switcher -->
         <button @click="toggleFullscreen" 
-                class="w-10 h-10 rounded-xl flex items-center justify-center border border-slate-700/50 bg-slate-900/60 text-slate-400 hover:text-white hover:border-cyan-500/40 transition duration-300"
+                class="w-10 h-10 rounded-xl flex items-center justify-center border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-cyan-500/40 transition duration-300"
                 :title="isFullscreen ? t('fullscreen_exit') : t('fullscreen_enter')">
           <i :class="isFullscreen ? 'fa-solid fa-compress' : 'fa-solid fa-expand'"></i>
         </button>
         
         <!-- Settings Gear Toggle Button -->
         <button @click="isSettingsOpen = true" 
-                class="w-10 h-10 rounded-xl flex items-center justify-center border border-slate-700/50 bg-slate-900/60 text-slate-400 hover:text-white hover:border-cyan-500/40 transition duration-300">
+                class="w-10 h-10 rounded-xl flex items-center justify-center border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-cyan-500/40 transition duration-300">
           <i class="fa-solid fa-gear animate-spin-slow"></i>
         </button>
       </div>
@@ -143,13 +143,13 @@
         </div>
         
         <!-- Placeholder Workspace Area (To be replaced by target tool functionality) -->
-        <div class="w-full bg-slate-950/40 border border-slate-800/80 rounded-2xl p-6 text-center space-y-4">
+        <div class="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-2xl p-6 text-center space-y-4">
           <p class="text-xs font-mono tracking-widest text-cyan-500 uppercase">// ACTIVE WORKSPACE PANEL</p>
           <div class="flex gap-4 justify-center">
             <button class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-bold hover:shadow-lg hover:shadow-cyan-500/20 transition duration-300">
               Sample Action
             </button>
-            <button class="px-5 py-2.5 rounded-xl border border-slate-700 bg-slate-900/40 font-semibold hover:border-slate-500 transition duration-300">
+            <button class="px-5 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] font-semibold hover:border-slate-500 transition duration-300">
               Secondary Action
             </button>
           </div>
@@ -167,15 +167,15 @@
     </footer>
 
     <!-- Premium Customizer Settings Overlay Dialog -->
-    <div v-if="isSettingsOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm transition-all duration-300">
+    <div v-if="isSettingsOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[var(--bg-primary)] backdrop-blur-sm transition-all duration-300">
       <div class="w-full max-w-md glass-panel rounded-3xl overflow-hidden shadow-2xl relative">
         <!-- Dialog Header -->
-        <div class="px-6 py-4 border-b border-slate-800/50 flex justify-between items-center bg-slate-900/40">
+        <div class="px-6 py-4 border-b border-[var(--border-color)] flex justify-between items-center bg-[var(--bg-card)]">
           <div class="flex items-center gap-2 text-cyan-400">
             <i class="fa-solid fa-sliders"></i>
             <h3 class="font-bold">[[ t('settings_title') ]]</h3>
           </div>
-          <button @click="closeSettings" class="text-slate-500 hover:text-white transition duration-200">
+          <button @click="closeSettings" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition duration-200">
             <i class="fa-solid fa-xmark text-lg"></i>
           </button>
         </div>
@@ -184,15 +184,15 @@
         <div class="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
           <!-- 1. Language Toggle -->
           <div class="space-y-2">
-            <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('lang_label') ]]</label>
-            <div class="grid grid-cols-2 gap-2 bg-slate-950/50 p-1 rounded-xl border border-slate-800">
+            <label class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">[[ t('lang_label') ]]</label>
+            <div class="grid grid-cols-2 gap-2 bg-[var(--bg-primary)] p-1 rounded-xl border border-[var(--border-color)]">
               <button @click="settings.lang = 'en'" 
-                      :class="settings.lang === 'en' ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20' : 'text-slate-400 hover:text-white'"
+                      :class="settings.lang === 'en' ? 'bg-cyan-500 text-[var(--text-main)] font-bold shadow-md shadow-cyan-500/20' : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'"
                       class="py-2 px-3 rounded-lg text-sm transition duration-200">
                 English
               </button>
               <button @click="settings.lang = 'ja'" 
-                      :class="settings.lang === 'ja' ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20' : 'text-slate-400 hover:text-white'"
+                      :class="settings.lang === 'ja' ? 'bg-cyan-500 text-[var(--text-main)] font-bold shadow-md shadow-cyan-500/20' : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'"
                       class="py-2 px-3 rounded-lg text-sm transition duration-200">
                 日本語
               </button>
@@ -201,20 +201,20 @@
 
           <!-- 2. Theme Selection -->
           <div class="space-y-2">
-            <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('theme_label') ]]</label>
-            <div class="grid grid-cols-3 gap-2 bg-slate-950/50 p-1 rounded-xl border border-slate-800">
+            <label class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">[[ t('theme_label') ]]</label>
+            <div class="grid grid-cols-3 gap-2 bg-[var(--bg-primary)] p-1 rounded-xl border border-[var(--border-color)]">
               <button @click="setTheme('dark')" 
-                      :class="settings.theme === 'dark' ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20' : 'text-slate-400 hover:text-white'"
+                      :class="settings.theme === 'dark' ? 'bg-cyan-500 text-[var(--text-main)] font-bold shadow-md shadow-cyan-500/20' : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'"
                       class="py-2 px-1 rounded-lg text-xs transition duration-200">
                 [[ t('theme_dark') ]]
               </button>
               <button @click="setTheme('light')" 
-                      :class="settings.theme === 'light' ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20' : 'text-slate-400 hover:text-white'"
+                      :class="settings.theme === 'light' ? 'bg-cyan-500 text-[var(--text-main)] font-bold shadow-md shadow-cyan-500/20' : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'"
                       class="py-2 px-1 rounded-lg text-xs transition duration-200">
                 [[ t('theme_light') ]]
               </button>
               <button @click="setTheme('neon')" 
-                      :class="settings.theme === 'neon' ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20' : 'text-slate-400 hover:text-white'"
+                      :class="settings.theme === 'neon' ? 'bg-cyan-500 text-[var(--text-main)] font-bold shadow-md shadow-cyan-500/20' : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'"
                       class="py-2 px-1 rounded-lg text-xs transition duration-200">
                 [[ t('theme_neon') ]]
               </button>
@@ -222,49 +222,49 @@
           </div>
 
           <!-- 3. Background Customizer -->
-          <div class="space-y-4 pt-2 border-t border-slate-800/40">
+          <div class="space-y-4 pt-2 border-t border-[var(--border-color)]">
             <div class="space-y-2">
-              <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('bg_url_label') ]]</label>
+              <label class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">[[ t('bg_url_label') ]]</label>
               <input type="text" v-model="settings.bgUrl" placeholder="https://example.com/image.jpg"
-                     class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition">
+                     class="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-main)] placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition">
             </div>
 
             <div class="space-y-2">
               <div class="flex justify-between items-center">
-                <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('bg_opacity_label') ]]</label>
+                <label class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">[[ t('bg_opacity_label') ]]</label>
                 <span class="text-xs font-mono text-cyan-400">[[ Math.round(settings.bgOpacity * 100) ]]%</span>
               </div>
               <input type="range" min="0" max="0.8" step="0.05" v-model.number="settings.bgOpacity"
-                     class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+                     class="w-full h-1.5 bg-[var(--bg-primary)] rounded-lg appearance-none cursor-pointer accent-cyan-500">
             </div>
 
             <div class="space-y-2">
               <div class="flex justify-between items-center">
-                <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('bg_blur_label') ]]</label>
+                <label class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">[[ t('bg_blur_label') ]]</label>
                 <span class="text-xs font-mono text-cyan-400">[[ settings.bgBlur ]]px</span>
               </div>
               <input type="range" min="0" max="24" step="1" v-model.number="settings.bgBlur"
-                     class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+                     class="w-full h-1.5 bg-[var(--bg-primary)] rounded-lg appearance-none cursor-pointer accent-cyan-500">
             </div>
           </div>
 
           <!-- 4. Tool Specific Custom Settings (Placeholder Slot) -->
           <!-- Uncomment and edit this section to add settings unique to your tool -->
           <!--
-          <div class="space-y-4 pt-4 border-t border-slate-800/40">
+          <div class="space-y-4 pt-4 border-t border-[var(--border-color)]">
             <div class="flex justify-between items-center">
-              <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('custom_settings_title') ]]</label>
+              <label class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">[[ t('custom_settings_title') ]]</label>
             </div>
             
-            <div class="flex items-center justify-between bg-slate-950/40 p-3 rounded-xl border border-slate-800/50">
+            <div class="flex items-center justify-between bg-[var(--bg-primary)] p-3 rounded-xl border border-[var(--border-color)]">
               <div class="flex flex-col">
-                <span class="text-sm font-semibold text-slate-200">Show Seconds</span>
-                <span class="text-[10px] text-slate-500">Display seconds indicator on clock face</span>
+                <span class="text-sm font-semibold text-[var(--text-main)]">Show Seconds</span>
+                <span class="text-[10px] text-[var(--text-muted)]">Display seconds indicator on clock face</span>
               </div>
               <button @click="settings.custom.showSeconds = !settings.custom.showSeconds"
                       class="w-12 h-6 rounded-full p-1 transition-colors duration-200 focus:outline-none"
-                      :class="settings.custom.showSeconds ? 'bg-cyan-500' : 'bg-slate-800'">
-                <div class="bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-200"
+                      :class="settings.custom.showSeconds ? 'bg-cyan-500' : 'bg-[var(--bg-card)]'">
+                <div class="bg-[var(--bg-card)] w-4 h-4 rounded-full shadow-md transform transition-transform duration-200"
                      :class="settings.custom.showSeconds ? 'translate-x-6' : 'translate-x-0'"></div>
               </button>
             </div>
@@ -273,12 +273,12 @@
         </div>
 
         <!-- Dialog Footer Action Controls -->
-        <div class="px-6 py-4 border-t border-slate-800/50 flex justify-between bg-slate-900/20">
+        <div class="px-6 py-4 border-t border-[var(--border-color)] flex justify-between bg-[var(--bg-card)]/20">
           <button @click="resetToDefault" class="text-xs text-rose-400 font-semibold hover:text-rose-300 transition duration-200">
             <i class="fa-solid fa-rotate-left mr-1"></i> [[ t('reset') ]]
           </button>
           <div class="flex gap-2">
-            <button @click="closeSettings" class="px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition duration-200">
+            <button @click="closeSettings" class="px-4 py-2 rounded-xl bg-cyan-500 text-[var(--text-main)] font-bold hover:bg-cyan-400 transition duration-200">
               [[ t('save_settings') ]]
             </button>
           </div>

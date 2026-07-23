@@ -7,14 +7,14 @@
 
   <!-- Hero Section -->
   <section class="text-center max-w-3xl mx-auto py-12 relative z-10 space-y-4">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/60 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 text-xs font-semibold text-teal-600 dark:text-teal-400 tracking-wider uppercase mb-2">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] text-xs font-semibold text-teal-600 dark:text-teal-400 tracking-wider uppercase mb-2">
       <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
       [[ t('gen3_portal', 'Gen3 Asset Portal') ]]
     </div>
     <h1 class="text-4xl sm:text-5xl font-black tracking-tight bg-gradient-to-r from-teal-400 via-emerald-400 to-blue-500 bg-clip-text text-transparent">
       [[ t('app_title', '{{ meta.site_title }}') ]]
     </h1>
-    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto leading-relaxed">
+    <p class="text-base sm:text-lg text-[var(--text-muted)] max-w-xl mx-auto leading-relaxed">
       [[ t('slogan', '{{ meta.slogan }}') ]]
     </p>
   </section>
@@ -22,11 +22,11 @@
   <!-- Tools Grid -->
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
     {% for tool in tools %}
-    <div class="group bg-white/40 dark:bg-slate-950/40 backdrop-blur-md border border-slate-200 dark:border-slate-800/80 p-5 rounded-2xl hover:border-teal-500/40 hover:bg-white/60 dark:hover:bg-slate-900/50 hover:shadow-[0_0_30px_rgba(20,184,166,0.05)] transition-all duration-300 flex flex-col justify-between">
+    <div class="group bg-[var(--bg-card)] bg-[var(--bg-primary)] backdrop-blur-md border border-[var(--border-color)] p-5 rounded-2xl hover:border-teal-500/40 hover:bg-[var(--bg-card)] dark:hover:bg-[var(--bg-card)] hover:shadow-[0_0_30px_rgba(20,184,166,0.05)] transition-all duration-300 flex flex-col justify-between">
       <div>
         <!-- Thumbnail Preview Frame -->
-        <div class="w-full aspect-[16/10] rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 overflow-hidden mb-4 relative flex items-center justify-center group-hover:border-teal-500/20 transition duration-300">
-          <div class="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-950 flex items-center justify-center text-3xl select-none text-slate-400 dark:text-slate-700 opacity-60">
+        <div class="w-full aspect-[16/10] rounded-xl bg-slate-100 bg-[var(--bg-card)] border border-[var(--border-color)] overflow-hidden mb-4 relative flex items-center justify-center group-hover:border-teal-500/20 transition duration-300">
+          <div class="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-950 flex items-center justify-center text-3xl select-none text-[var(--text-muted)] text-[var(--text-main)] opacity-60">
             {{ tool.icon }}
           </div>
           <img src="/static/thumbnails/{{ tool.id }}.png" 
@@ -37,7 +37,7 @@
 
         <!-- ID and Meta -->
         <div class="flex justify-between items-center mb-2">
-          <span class="text-[10px] font-bold text-slate-400 dark:text-slate-600 tracking-widest uppercase font-mono">
+          <span class="text-[10px] font-bold text-[var(--text-muted)] tracking-widest uppercase font-mono">
             // {{ tool.id }}
           </span>
           <span class="text-[10px] font-bold text-teal-600 dark:text-teal-400 bg-teal-400/5 border border-teal-500/10 px-2 py-0.5 rounded">
@@ -46,19 +46,19 @@
         </div>
         
         <!-- Tool Title -->
-        <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition duration-300 mb-2">
+        <h2 class="text-lg font-bold text-[var(--text-main)] group-hover:text-teal-600 dark:group-hover:text-teal-400 transition duration-300 mb-2">
           [[ t('tools.{{ tool.id }}.name', '{{ tool.name }}') ]]
         </h2>
         
         <!-- Tool Description -->
-        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+        <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-6">
           [[ t('tools.{{ tool.id }}.description', '{{ tool.description }}') ]]
         </p>
       </div>
 
       <!-- Action Button -->
       <div class="pt-2 border-t border-slate-100 dark:border-slate-900/60 flex justify-between items-center">
-        <span class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 tracking-wide">
+        <span class="text-[10px] font-semibold text-[var(--text-muted)] tracking-wide">
           WEB-APP
         </span>
         <a href="/tools/{{ tool.id }}" class="inline-flex items-center gap-1 text-sm font-bold text-teal-600 dark:text-teal-400 hover:text-teal-500 dark:hover:text-teal-300 transition duration-200">
