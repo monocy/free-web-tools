@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ meta.site_title }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body {
+      background-color: #0f172a; /* slate-950 */
+      color: #f1f5f9; /* slate-100 */
+    }
+    [v-cloak] { display: none; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4">
+  <div id="app" v-cloak class="w-full max-w-5xl">
+    <header class="mb-10 text-center">
+      <h1 class="text-4xl font-bold mb-2">{{ meta.site_title }}</h1>
+      <p class="text-slate-400">{{ meta.slogan }}</p>
+    </header>
+
+    <!-- Grid List -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a v-for="tool in tools" :key="tool.id" :href="'/tools/' + tool.id" class="block bg-slate-800 rounded-xl p-6 hover:bg-slate-700 transition border border-slate-700 hover:border-slate-500 shadow-lg group">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="text-4xl group-hover:scale-110 transition-transform">[[ tool.icon ]]</span>
+          <h2 class="text-xl font-semibold">[[ tool.name ]]</h2>
+        </div>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          [[ tool.description ]]
+        </p>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const { createApp, ref } = Vue;
+
+      const rawTools = {{ tools | tojson | safe }};
+
+      createApp({
+        compilerOptions: { delimiters: ['[[', ']]'] },
+        setup() {
+          const tools = ref(rawTools);
+          return { tools };
+        }
+      }).mount('#app');
+    })();
+  </script>
+</body>
+</html>
