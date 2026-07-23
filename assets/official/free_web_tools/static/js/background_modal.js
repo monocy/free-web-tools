@@ -17,11 +17,11 @@ export default {
   emits: ['close'],
   delimiters: ['[[', ']]'],
   template: `
-    <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60" @click.self="$emit('close')" v-cloak>
+    <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-transparent" @click.self="$emit('close')" v-cloak>
       <div class="modal-content w-full max-w-lg p-6 rounded-2xl border bg-[var(--bg-primary)] border-[var(--border-color)] text-[var(--text-main)] shadow-2xl relative">
         <h3 class="text-xl font-bold mb-6 flex items-center justify-between">
           <span>[[ t('bg_settings', 'Background Customization') ]]</span>
-          <button @click="$emit('close')" class="text-[var(--text-muted)] hover:text-[var(--text-main)]">
+          <button @click="$emit('close')" class="text-[var(--text-muted)] hover:text-[var(--text-main)] theme-light:text-slate-500 theme-light:hover:text-slate-800">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </h3>
@@ -30,16 +30,43 @@ export default {
           <!-- Preset Images -->
           <div>
             <label class="block text-sm font-semibold text-[var(--text-muted)] mb-2">[[ t('preset_images', 'Preset Images') ]]</label>
-            <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-teal-600">
-              <div 
-                v-for="p in presets" 
-                :key="p.url" 
-                class="flex-shrink-0 w-24 h-16 rounded-lg overflow-hidden border-2 cursor-pointer transition-all hover:scale-105"
-                :class="settings.bgUrl === p.url ? 'border-teal-500 scale-105' : 'border-transparent'"
-                @click="selectBg(p.url)"
+            <div class="flex items-center gap-2">
+              <!-- Left Arrow -->
+              <button 
+                @click="prevPage" 
+                :disabled="currentPage === 0"
+                class="p-2 border rounded-lg transition-colors flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed border-[var(--border-color)] text-[var(--text-main)] hover:bg-[var(--border-color)] theme-light:border-slate-300 theme-light:text-slate-800 theme-light:hover:bg-slate-200"
+                aria-label="Previous presets"
               >
-                <img :src="p.url" class="w-full h-full object-cover" alt="Preset background">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </button>
+
+              <!-- Thumbnails -->
+              <div class="flex-1 flex gap-3 overflow-hidden justify-center py-2">
+                <div 
+                  v-for="p in visiblePresets" 
+                  :key="p.url" 
+                  class="flex-shrink-0 w-16 h-11 sm:w-20 sm:h-14 rounded-lg overflow-hidden border-2 cursor-pointer transition-all hover:scale-105"
+                  :class="settings.bgUrl === p.url ? 'border-teal-500 scale-105' : 'border-transparent'"
+                  @click="selectBg(p.url)"
+                >
+                  <img :src="p.url" class="w-full h-full object-cover" alt="Preset background">
+                </div>
               </div>
+
+              <!-- Right Arrow -->
+              <button 
+                @click="nextPage" 
+                :disabled="currentPage >= maxPage"
+                class="p-2 border rounded-lg transition-colors flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed border-[var(--border-color)] text-[var(--text-main)] hover:bg-[var(--border-color)] theme-light:border-slate-300 theme-light:text-slate-800 theme-light:hover:bg-slate-200"
+                aria-label="Next presets"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
             </div>
           </div>
 
@@ -47,12 +74,12 @@ export default {
           <div>
             <label class="block text-sm font-semibold text-[var(--text-muted)] mb-2">[[ t('upload_image', 'Upload Custom Image') ]]</label>
             <div 
-              class="border-2 border-dashed border-[var(--border-color)] hover:border-teal-500 rounded-xl p-6 text-center cursor-pointer transition-colors duration-200"
+              class="border-2 border-dashed border-[var(--border-color)] hover:border-teal-500 rounded-xl p-6 text-center cursor-pointer transition-colors duration-200 theme-light:border-slate-300 theme-light:hover:border-blue-600 theme-light:hover:bg-blue-50/50"
               @dragover.prevent="dragOver = true"
               @dragleave.prevent="dragOver = false"
               @drop.prevent="onDrop"
               @click="triggerFileInput"
-              :class="dragOver ? 'border-teal-500 bg-teal-500/10' : ''"
+              :class="dragOver ? (settings.theme === 'light' ? 'border-blue-600 bg-blue-50' : 'border-teal-500 bg-teal-500/10') : ''"
             >
               <svg class="mx-auto h-8 w-8 text-[var(--text-muted)] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
@@ -91,7 +118,7 @@ export default {
         </div>
 
         <div class="mt-8 flex justify-end">
-          <button @click="$emit('close')" class="px-5 py-2 bg-teal-600 hover:bg-teal-500 text-sm font-bold text-[var(--text-main)] rounded-xl transition duration-200">
+          <button @click="$emit('close')" class="px-5 py-2 bg-teal-600 hover:bg-teal-500 text-sm font-bold text-[var(--text-main)] rounded-xl transition duration-200 theme-light:bg-blue-600 theme-light:hover:bg-blue-700 theme-light:text-white">
             [[ t('close', 'Close') ]]
           </button>
         </div>
@@ -104,12 +131,34 @@ export default {
         { url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80' },
         { url: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=1200&q=80' },
         { url: 'https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?auto=format&fit=crop&w=1200&q=80' },
-        { url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80' }
+        { url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1472214222541-d510753a49fa?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1520038410233-7141be7e6f97?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=1200&q=80' },
+        { url: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1200&q=80' }
       ],
+      currentPage: 0,
       customImages: [],
       dragOver: false,
       db: null
     };
+  },
+  computed: {
+    visiblePresets() {
+      const start = this.currentPage * 8;
+      return this.presets.slice(start, start + 8);
+    },
+    maxPage() {
+      return Math.ceil(this.presets.length / 8) - 1;
+    }
   },
   async mounted() {
     try {
@@ -132,6 +181,16 @@ export default {
     },
     selectBg(url) {
       this.settings.bgUrl = url;
+    },
+    prevPage() {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.maxPage) {
+        this.currentPage++;
+      }
     },
     openDB() {
       return new Promise((resolve, reject) => {
