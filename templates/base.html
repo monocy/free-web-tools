@@ -96,7 +96,7 @@
       }"
     ></div>
 
-    <header v-show="!isFullscreen" class="border-b border-[var(--border-color)] bg-[var(--bg-header)] backdrop-blur-lg sticky top-0 z-50 relative">
+    <header v-show="!isFullscreen" class="border-b border-[var(--border-color)] bg-[var(--bg-header)] backdrop-blur-lg fixed top-0 left-0 right-0 w-full z-[9999]">
       <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         <a href="/" class="text-xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
           [[ t('app_title', '{{ meta.site_title }}') ]]
@@ -117,7 +117,7 @@
       </div>
     </header>
 
-    <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-8 relative z-10">
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 pt-24 pb-8 relative z-10">
       {% block content %}{% endblock %}
     </main>
 
