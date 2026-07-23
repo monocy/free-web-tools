@@ -1,6 +1,7 @@
 # Tasks Summary
 
 ## 2026-07-24
+- [x] portal_common_assets (完了)
 - [ ] portal_scrollbar_visibility_improvement (Jules実行待ち)
 - [ ] portal_duplicate_scrollbar_fix (Jules実行待ち)
 - [x] portal_header_above_scrollbar (完了)
