@@ -1,6 +1,11 @@
 # Tasks
 
-- [ ] 各ツール（clock, calculator, qr-code, stopwatch, timer）に起動した i18n 対応用の Jules PR をレビューしてマージする
-- [ ] 親プロジェクトで `git submodule update --remote` し、各サブモジュールの参照を最新コミットにバンプする
-- [ ] 各ツールディレクトリ内で `python .ai/tests/smoke_app.py`（Playwrightテスト）を実行して PASS することを確認する
-- [ ] 新規開発用共通テンプレート `tool-template` の仕様が各ツールで満たされているか動作確認する
+- [x] 各ツール（clock, calculator, qr-code, stopwatch, timer）に起動した i18n 対応用の Jules PR をレビューしてマージする
+- [x] 親プロジェクトで `git submodule update --remote` し、各サブモジュールの参照を最新コミットにバンプする
+- [x] 各ツールディレクトリ内で `python .ai/tests/smoke_app.py`（Playwrightテスト）を実行して PASS することを確認する
+- [x] 新規開発用共通テンプレート `tool-template` の仕様が各ツールで満たされているか動作確認する
+
+- [x] 今後他のツールを作るための共通テンプレート (`tool-template`) のリファクタリング、設定画面の拡張対応、および開発ガイドの体系的整備
+- [x] 全ツール（clock, calculator, qr-code, stopwatch, timer）に最新の共通アセットテンプレート仕様を完全に適用する
+- [x] Julesが 'jules' CLI コマンドを直接実行できるようにルールファイル (GEMINI.md, AGENTS.md) を修正する
+- [x] Jules CLI を使用して、全ツールの多言語対応およびテーマ切り替えの整合性を再確認・最適化する

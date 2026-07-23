@@ -1,0 +1,20 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Temporary agent scripts & reports
+.ai/reports/
+.ai/scripts/
+.ai/tasks/
+.ai/tools/jules/
+
+# OS files
+.DS_Store
+Thumbs.db

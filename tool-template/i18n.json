@@ -15,7 +15,8 @@
     "fullscreen_exit": "Exit Fullscreen",
     "save_settings": "Apply Settings",
     "close": "Close",
-    "reset": "Reset Default"
+    "reset": "Reset Default",
+    "custom_settings_title": "Tool Settings"
   },
   "ja": {
     "tool_title": "ネオン・デジタルツール",
@@ -33,6 +34,7 @@
     "fullscreen_exit": "全画面終了",
     "save_settings": "設定を適用",
     "close": "閉じる",
-    "reset": "デフォルトに戻す"
+    "reset": "デフォルトに戻す",
+    "custom_settings_title": "ツール固有設定"
   }
 }

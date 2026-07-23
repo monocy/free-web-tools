@@ -247,6 +247,29 @@
                      class="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-500">
             </div>
           </div>
+
+          <!-- 4. Tool Specific Custom Settings (Placeholder Slot) -->
+          <!-- Uncomment and edit this section to add settings unique to your tool -->
+          <!--
+          <div class="space-y-4 pt-4 border-t border-slate-800/40">
+            <div class="flex justify-between items-center">
+              <label class="text-xs font-bold uppercase tracking-wider text-slate-400">[[ t('custom_settings_title') ]]</label>
+            </div>
+            
+            <div class="flex items-center justify-between bg-slate-950/40 p-3 rounded-xl border border-slate-800/50">
+              <div class="flex flex-col">
+                <span class="text-sm font-semibold text-slate-200">Show Seconds</span>
+                <span class="text-[10px] text-slate-500">Display seconds indicator on clock face</span>
+              </div>
+              <button @click="settings.custom.showSeconds = !settings.custom.showSeconds"
+                      class="w-12 h-6 rounded-full p-1 transition-colors duration-200 focus:outline-none"
+                      :class="settings.custom.showSeconds ? 'bg-cyan-500' : 'bg-slate-800'">
+                <div class="bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-200"
+                     :class="settings.custom.showSeconds ? 'translate-x-6' : 'translate-x-0'"></div>
+              </button>
+            </div>
+          </div>
+          -->
         </div>
 
         <!-- Dialog Footer Action Controls -->
@@ -276,7 +299,9 @@
         theme: 'dark',
         bgUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop',
         bgOpacity: 0.15,
-        bgBlur: 8
+        bgBlur: 8,
+        // Individual tool custom settings (can be extended in custom sub-object)
+        custom: {}
       };
 
       createApp({
@@ -307,11 +332,20 @@
           const applyTheme = (themeName) => {
             const root = document.getElementById('theme-root');
             if (!root) return;
+            
+            // Base layout classes
             root.className = 'min-h-screen relative overflow-hidden flex flex-col justify-between';
+            
+            // Toggle theme-specific CSS variables and Tailwind dark mode class
             if (themeName === 'light') {
               root.classList.add('theme-light');
+              root.classList.remove('dark'); // Disable Tailwind dark mode
             } else if (themeName === 'neon') {
               root.classList.add('theme-neon');
+              root.classList.add('dark');    // Enable Tailwind dark mode
+            } else {
+              // Default Premium Dark
+              root.classList.add('dark');    // Enable Tailwind dark mode
             }
           };
 

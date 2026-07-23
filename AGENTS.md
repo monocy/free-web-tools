@@ -20,7 +20,7 @@ You are a highly skilled software engineer with extensive knowledge in many prog
 - PowerShell: use `;` not `&&`.
 - Change only files inside this repository. Do not edit unrelated trees.
 - No `python -c` — always write a `.py` file to run.
-- CRUD, HTTP requests, and shell commands MUST run via python scripts under `.ai/scripts/`.
+- CRUD, HTTP requests, and shell commands MUST run via python scripts under `.ai/scripts/` (Except for 'jules' CLI command, which can be executed directly).
 - Never `taskkill /F /IM python.exe`.
 - Never delete protected files: `AGENTS.md`, `goal.md`, `tasks.md`, `README.md`, `start.bat`, `.ai/`.
 

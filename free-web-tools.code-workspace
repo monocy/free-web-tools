@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "name": "genshin-100x",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.venv": true,
+      "**/__pycache__": true
+    },
+    "python.defaultInterpreterPath": ".venv/Scripts/python.exe"
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python"
+    ]
+  }
+}
