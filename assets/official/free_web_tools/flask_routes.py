@@ -3,7 +3,7 @@ from __future__ import annotations
 from flask import Blueprint, render_template, jsonify, request
 
 def setup_routes(app, ctx, url_prefix: str):
-    bp = Blueprint("official_web_tools_100x", __name__, url_prefix=url_prefix or None)
+    bp = Blueprint("official_free_web_tools", __name__, url_prefix=url_prefix or None)
 
     @bp.get("/")
     def index():

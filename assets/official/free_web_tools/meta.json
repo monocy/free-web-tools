@@ -1,8 +1,8 @@
 {
-  "name": "web_tools_100x",
-  "description": "web-tools-100x site routes (Flask gen3)",
+  "name": "free_web_tools",
+  "description": "free-web-tools site routes (Flask gen3)",
   "package": {
-    "id": "official.web_tools_100x",
+    "id": "official.free_web_tools",
     "version": "0.1.0"
   },
   "hosts": {

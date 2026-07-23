@@ -9,7 +9,7 @@
       "port": 5042,
       "debug": true
     },
-    "official/web_tools_100x": {
+    "official/free_web_tools": {
       "enabled": true
     }
   }

@@ -23,8 +23,8 @@ if not exist "%VENV_PY%" (
   exit /b 1
 )
 
-echo Starting web-tools-100x on %URL%
-start "web-tools-100x" "%VENV_PY%" "%~dp0main.py"
+echo Starting free-web-tools on %URL%
+start "free-web-tools" "%VENV_PY%" "%~dp0main.py"
 timeout /t 2 >nul
 start "" "%URL%"
 endlocal
