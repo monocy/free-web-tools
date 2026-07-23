@@ -31,8 +31,8 @@ export default {
           <div>
             <label class="block text-sm font-semibold text-[var(--text-muted)] mb-2">[[ t('lang', 'Language') ]]</label>
             <select v-model="settings.lang" class="w-full px-3 py-2 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg text-sm focus:outline-none focus:border-teal-500 text-[var(--text-main)]">
-              <option value="ja">[[ t('lang_ja', '日本語') ]]</option>
-              <option value="en">[[ t('lang_en', 'English') ]]</option>
+              <option value="ja">日本語</option>
+              <option value="en">English</option>
             </select>
           </div>
 
