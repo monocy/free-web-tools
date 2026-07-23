@@ -1,6 +1,7 @@
 # Tasks Summary
 
 ## 2026-07-24
+- [x] portal_fullscreen_header_toggle (完了)
 - [x] portal_footer_text_update (完了)
 - [x] portal_font_size_bug_fixes (完了)
 - [ ] portal_header_theme_fix (Jules実行待ち)
