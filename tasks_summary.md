@@ -1,6 +1,7 @@
 # Tasks Summary
 
 ## 2026-07-24
+- [x] portal_ui_fine_tuning (完了)
 - [x] portal_ui_refactoring (完了)
 - [x] improve_theme_color_contrast (完了)
 - [x] portal_i18n_and_themes (完了)
