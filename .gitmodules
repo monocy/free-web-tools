@@ -1,3 +1,15 @@
 [submodule "assets/official/free_web_tools/tools/clock"]
 	path = assets/official/free_web_tools/tools/clock
 	url = https://github.com/monocy/tool-clock.git
+[submodule "assets/official/free_web_tools/tools/qr-code"]
+	path = assets/official/free_web_tools/tools/qr-code
+	url = https://github.com/monocy/tool-qrcode.git
+[submodule "assets/official/free_web_tools/tools/stopwatch"]
+	path = assets/official/free_web_tools/tools/stopwatch
+	url = https://github.com/monocy/tool-stopwatch.git
+[submodule "assets/official/free_web_tools/tools/timer"]
+	path = assets/official/free_web_tools/tools/timer
+	url = https://github.com/monocy/tool-timer.git
+[submodule "assets/official/free_web_tools/tools/calculator"]
+	path = assets/official/free_web_tools/tools/calculator
+	url = https://github.com/monocy/tool-calculator.git
