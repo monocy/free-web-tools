@@ -78,3 +78,22 @@ free-web-tools/
    git commit -m "chore: bump clock submodule to latest commit"
    git push origin main
    ```
+
+---
+
+## 3. 次回開発への引き継ぎ事項 (Next Session Handover)
+
+### 現在の状況
+- **多言語対応 (i18n) の自動実装フェーズ**:
+  - 全5ツール（`clock`, `calculator`, `qr-code`, `stopwatch`, `timer`）の個別リポジトリに対し、Jules による一括多言語対応セッションを起動済みです。
+  - 各サブモジュール内に `i18n.json` が作成され、Vue3から動的に読み込まれ、UI切替ボタンが実装される予定です。
+- **共通開発テンプレートの配備**:
+  - 新規ツールを同一の UX（多言語、テーマ切替、背景画像調整、設定保存、全画面対応）で量産できるよう、[tool-template/](file:///E:/Tfiles/Tbox/Sites/free-web-tools/tool-template/) フォルダと [TEMPLATE_GUIDE.md](file:///E:/Tfiles/Tbox/Sites/free-web-tools/TEMPLATE_GUIDE.md) を整備・プッシュ完了しています。
+
+### 次回セッションでのアクション
+1. **各ツールの Jules PR レビューとマージ**:
+   - `clock`, `calculator`, `qr-code`, `stopwatch`, `timer` の各リポジトリに提案された Jules の PR を順次確認し、マージします。
+2. **サブモジュールの参照コミットID更新**:
+   - 親リポジトリのサブモジュールを最新コミットに追従（`git submodule update --remote` 等）し、親プロジェクトをコミットしてプッシュします。
+3. **テスト検証**:
+   - 各ツールディレクトリ内で単体 Playwright 監査（`python .ai/tests/smoke_app.py`）を実行し、コンソールエラーや言語切り替えが正常に動作するか確認します。
