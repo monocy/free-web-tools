@@ -47,7 +47,16 @@
     "upload_image": "Upload Custom Image",
     "drag_drop_text": "Drag & drop an image here, or click to browse",
     "custom_images": "Custom Images",
-    "delete": "Delete"
+    "delete": "Delete",
+    "theme_neon": "Neon",
+    "reset": "Reset",
+    "save_settings": "Save Settings",
+    "settings_title": "Settings",
+    "lang_label": "Language",
+    "theme_label": "Theme",
+    "bg_url_label": "Background Image URL",
+    "bg_opacity_label": "Opacity",
+    "bg_blur_label": "Blur"
   },
   "ja": {
     "app_title": "Free Web Tools",
@@ -97,6 +106,15 @@
     "upload_image": "カスタム画像をアップロード",
     "drag_drop_text": "画像をここにドラッグ＆ドロップ、またはクリックして選択",
     "custom_images": "カスタム画像",
-    "delete": "削除"
+    "delete": "削除",
+    "theme_neon": "ネオン",
+    "reset": "リセット",
+    "save_settings": "設定を保存",
+    "settings_title": "設定",
+    "lang_label": "言語",
+    "theme_label": "テーマ",
+    "bg_url_label": "背景画像 URL",
+    "bg_opacity_label": "不透明度",
+    "bg_blur_label": "ぼかし"
   }
 }

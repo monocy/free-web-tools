@@ -16,74 +16,7 @@
     }
   </script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <style>
-    [v-cloak] { display: none; }
-    :root {
-      /* Dark Theme (default) */
-      --bg-primary: #020617; /* slate-950 */
-      --bg-card: rgba(15, 23, 42, 0.4);
-      --border-color: #1e293b; /* slate-800 */
-      --text-main: #f1f5f9; /* slate-100 */
-      --text-muted: #94a3b8; /* slate-400 */
-      --accent-color: #14b8a6; /* teal-500 */
-      --bg-header: rgba(15, 23, 42, 0.45);
-    }
-
-    .theme-light {
-      --bg-primary: #f8fafc; /* slate-50 */
-      --bg-card: rgba(255, 255, 255, 0.4);
-      --border-color: #e2e8f0; /* slate-200 */
-      --text-main: #0f172a; /* slate-900 */
-      --text-muted: #64748b; /* slate-500 */
-      --accent-color: #0d9488; /* teal-600 */
-      --bg-header: rgba(255, 255, 255, 0.45);
-    }
-
-    .theme-neon {
-      --bg-primary: #09090b; /* zinc-950 */
-      --bg-card: rgba(9, 9, 11, 0.8);
-      --border-color: #f0abfc; /* fuchsia-400 */
-      --text-main: #f0abfc;
-      --text-muted: #c084fc;
-      --accent-color: #d946ef; /* fuchsia-600 */
-      --bg-header: rgba(2, 2, 5, 0.45);
-    }
-
-    html {
-      overflow-y: overlay;
-    }
-    body {
-      overflow-y: hidden;
-    }
-
-    /* Scrollbar customization */
-    /* Firefox */
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: rgba(100, 116, 139, 0.45) transparent;
-    }
-
-    /* Webkit-based browsers (Chrome, Safari, Edge, Opera) */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background-color: rgba(100, 116, 139, 0.45);
-      border-radius: 9999px;
-      border: 2px solid transparent;
-      background-clip: padding-box;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: rgba(100, 116, 139, 0.7);
-    }
-  </style>
+  <link rel="stylesheet" href="/static/css/portal.css">
 </head>
 <body class="bg-[var(--bg-primary)] text-[var(--text-main)] bg-[var(--bg-primary)] text-[var(--text-main)] min-h-screen flex flex-col font-sans relative transition-colors duration-300">
   <div id="layout-app" class="flex-1 flex flex-col min-h-screen relative z-10">
@@ -163,8 +96,9 @@
   <script type="module">
   import SettingsModal from '/static/js/settings_modal.js';
   import BackgroundModal from '/static/js/background_modal.js';
+  import { usePortalCommon } from '/static/js/portal_common.js';
 
-  const { createApp, ref, reactive, onMounted, watch } = Vue;
+  const { createApp, ref, onMounted } = Vue;
   createApp({
     delimiters: ['[[', ']]'],
     components: {
@@ -173,23 +107,6 @@
     },
     setup() {
       const translations = ref({});
-      const showSettings = ref(false);
-      const isBgModalOpen = ref(false);
-      const isFullscreen = ref(false);
-      const updateFullscreenState = () => {
-        isFullscreen.value = !!document.fullscreenElement;
-      };
-      
-      const settings = reactive({
-        lang: 'en',
-        theme: 'dark',
-        fontSize: 16,
-        bgUrl: '',
-        bgOpacity: 0.3,
-        bgBlur: 10,
-        custom: {}
-      });
-
       const loadTranslations = async () => {
         try {
           const res = await fetch('/i18n.json');
@@ -201,112 +118,15 @@
         }
       };
 
-      const loadSettings = () => {
-        const stored = localStorage.getItem('tool-settings');
-        if (stored) {
-          try {
-            const parsed = JSON.parse(stored);
-            Object.assign(settings, parsed);
-          } catch (e) {
-            console.error('Failed to parse settings', e);
-          }
-        } else {
-          const browserLang = navigator.language || '';
-          settings.lang = browserLang.startsWith('ja') ? 'ja' : 'en';
-        }
-      };
-
-      const saveSettings = () => {
-        localStorage.setItem('tool-settings', JSON.stringify(settings));
-      };
-
-      const applyTheme = (themeName) => {
-        const root = document.documentElement;
-        root.classList.remove('theme-light', 'theme-neon', 'dark');
-        if (themeName === 'light') {
-          root.classList.add('theme-light');
-        } else if (themeName === 'neon') {
-          root.classList.add('theme-neon');
-          root.classList.add('dark');
-        } else {
-          root.classList.add('dark');
-        }
-      };
-
-      watch(() => settings.theme, (newTheme) => {
-        applyTheme(newTheme);
-        saveSettings();
-      });
-
-      watch(() => settings.fontSize, (newVal) => {
-        document.documentElement.style.fontSize = newVal + 'px';
-        saveSettings();
-      });
-
-      watch(() => settings.lang, (newLang) => {
-        document.documentElement.lang = newLang;
-        saveSettings();
-      });
-
-      watch(() => settings.bgUrl, saveSettings);
-      watch(() => settings.bgOpacity, saveSettings);
-      watch(() => settings.bgBlur, saveSettings);
+      const portal = usePortalCommon(translations);
 
       onMounted(async () => {
-        loadSettings();
-        document.documentElement.style.fontSize = settings.fontSize + 'px';
-        applyTheme(settings.theme);
-        document.documentElement.lang = settings.lang;
         await loadTranslations();
-        document.addEventListener('fullscreenchange', updateFullscreenState);
       });
 
-      const t = (key, fallback = '') => {
-        const parts = key.split('.');
-        let current = translations.value[settings.lang];
-        if (!current) return fallback || key;
-        for (const part of parts) {
-          current = current[part];
-          if (current === undefined) return fallback || key;
-        }
-        return current;
-      };
-
-      const toggleFullscreen = () => {
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(err => {
-            console.error(err);
-          });
-        } else {
-          document.exitFullscreen();
-        }
-      };
-
-      const resetSettings = () => {
-        localStorage.removeItem('tool-settings');
-        settings.lang = (navigator.language || '').startsWith('ja') ? 'ja' : 'en';
-        settings.theme = 'dark';
-        settings.fontSize = 16;
-        settings.bgUrl = '';
-        settings.bgOpacity = 0.3;
-        settings.bgBlur = 10;
-        applyTheme(settings.theme);
-      };
-
-      const toggleTheme = () => {
-        settings.theme = settings.theme === 'light' ? 'dark' : 'light';
-      };
-
       return {
-        settings,
         translations,
-        showSettings,
-        isBgModalOpen,
-        isFullscreen,
-        t,
-        toggleFullscreen,
-        resetSettings,
-        toggleTheme
+        ...portal
       };
     }
   }).mount('#layout-app');
