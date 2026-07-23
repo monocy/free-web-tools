@@ -1,6 +1,7 @@
 # Tasks Summary
 
 ## 2026-07-24
+- [x] portal_bg_selector_enhancements (完了)
 - [x] portal_background_manager (完了)
 - [x] settings_modal_opacity (完了)
 - [x] portal_ui_fine_tuning (完了)
