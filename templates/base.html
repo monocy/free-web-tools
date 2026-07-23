@@ -26,6 +26,7 @@
       --text-main: #f1f5f9; /* slate-100 */
       --text-muted: #94a3b8; /* slate-400 */
       --accent-color: #14b8a6; /* teal-500 */
+      --bg-header: rgba(15, 23, 42, 0.45);
     }
 
     .theme-light {
@@ -35,6 +36,7 @@
       --text-main: #0f172a; /* slate-900 */
       --text-muted: #64748b; /* slate-500 */
       --accent-color: #0d9488; /* teal-600 */
+      --bg-header: rgba(255, 255, 255, 0.45);
     }
 
     .theme-neon {
@@ -44,6 +46,7 @@
       --text-main: #f0abfc;
       --text-muted: #c084fc;
       --accent-color: #d946ef; /* fuchsia-600 */
+      --bg-header: rgba(2, 2, 5, 0.45);
     }
   </style>
 </head>
@@ -61,7 +64,7 @@
       }"
     ></div>
 
-    <header class="border-b border-[var(--border-color)] bg-white/40 dark:bg-slate-950/40 backdrop-blur-lg sticky top-0 z-50 relative">
+    <header class="border-b border-[var(--border-color)] bg-[var(--bg-header)] backdrop-blur-lg sticky top-0 z-50 relative">
       <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         <a href="/" class="text-xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
           [[ t('app_title', '{{ meta.site_title }}') ]]
