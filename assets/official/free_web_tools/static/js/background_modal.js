@@ -146,7 +146,7 @@ export default {
                   min="0" 
                   max="1" 
                   step="0.05" 
-                  class="w-full h-1.5 bg-[var(--border-color)] rounded-lg appearance-none cursor-pointer accent-teal-500 theme-light:accent-blue-600 theme-light:bg-slate-200"
+                  class="w-full h-1.5 bg-[var(--border-color)] rounded-lg cursor-pointer accent-teal-500 theme-light:accent-blue-600 theme-light:bg-slate-200"
                 >
               </div>
 
@@ -162,7 +162,7 @@ export default {
                   min="0" 
                   max="20" 
                   step="1" 
-                  class="w-full h-1.5 bg-[var(--border-color)] rounded-lg appearance-none cursor-pointer accent-teal-500 theme-light:accent-blue-600 theme-light:bg-slate-200"
+                  class="w-full h-1.5 bg-[var(--border-color)] rounded-lg cursor-pointer accent-teal-500 theme-light:accent-blue-600 theme-light:bg-slate-200"
                 >
               </div>
             </div>

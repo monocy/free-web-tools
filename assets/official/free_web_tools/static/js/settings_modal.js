@@ -61,7 +61,7 @@ export default {
               <label class="block text-sm font-semibold text-[var(--text-muted)]">[[ t('font_size', 'Font Size') ]]</label>
               <span class="text-sm font-mono text-[var(--text-main)]">[[ settings.fontSize ]]px</span>
             </div>
-            <input type="range" min="14" max="24" v-model.number="settings.fontSize" class="w-full h-2 bg-[var(--border-color)] rounded-lg appearance-none cursor-pointer accent-teal-500 theme-light:accent-blue-600">
+            <input type="range" min="14" max="24" v-model.number="settings.fontSize" class="w-full h-2 bg-[var(--border-color)] rounded-lg cursor-pointer accent-teal-500 theme-light:accent-blue-600">
           </div>
 
           <!-- Custom Background -->

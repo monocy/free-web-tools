@@ -1,6 +1,7 @@
 # Tasks Summary
 
 ## 2026-07-24
+- [ ] portal_font_size_bug_fixes (Jules実行待ち)
 - [ ] portal_header_theme_fix (Jules実行待ち)
 - [x] portal_header_footer_styling (完了)
 - [x] portal_font_size_adjustment (完了)

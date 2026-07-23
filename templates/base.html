@@ -51,7 +51,7 @@
   </style>
 </head>
 <body class="bg-[var(--bg-primary)] text-[var(--text-main)] bg-[var(--bg-primary)] text-[var(--text-main)] min-h-screen flex flex-col font-sans relative transition-colors duration-300">
-  <div id="layout-app" class="flex-1 flex flex-col min-h-screen relative z-10" :style="{ fontSize: settings.fontSize + 'px' }">
+  <div id="layout-app" class="flex-1 flex flex-col min-h-screen relative z-10">
     <!-- Custom Background Layer -->
     <div 
       class="fixed inset-0 z-0 pointer-events-none transition-all duration-300"
@@ -199,7 +199,10 @@
         saveSettings();
       });
 
-      watch(() => settings.fontSize, saveSettings);
+      watch(() => settings.fontSize, (newVal) => {
+        document.documentElement.style.fontSize = newVal + 'px';
+        saveSettings();
+      });
 
       watch(() => settings.lang, (newLang) => {
         document.documentElement.lang = newLang;
@@ -212,6 +215,7 @@
 
       onMounted(async () => {
         loadSettings();
+        document.documentElement.style.fontSize = settings.fontSize + 'px';
         applyTheme(settings.theme);
         document.documentElement.lang = settings.lang;
         await loadTranslations();
