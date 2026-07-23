@@ -23,6 +23,14 @@ SITE_MAPS = {
     "memory-market": ["http://127.0.0.1:5037/"],
     "storage-market": ["http://127.0.0.1:5038/"],
     "pc-product-db": ["http://127.0.0.1:5041/"],
+    "free-web-tools": [
+        "http://127.0.0.1:5042/",
+        "http://127.0.0.1:5042/tools/clock",
+        "http://127.0.0.1:5042/tools/calculator",
+        "http://127.0.0.1:5042/tools/qr-code",
+        "http://127.0.0.1:5042/tools/stopwatch",
+        "http://127.0.0.1:5042/tools/timer"
+    ],
 }
 
 def audit_url(page, url):
@@ -61,6 +69,19 @@ def audit_url(page, url):
         issues.append(f"Console Errors ({len(console_errors)}): {console_errors[0]}")
     if page_errors:
         issues.append(f"Page Exceptions ({len(page_errors)}): {page_errors[0]}")
+
+    # Capture screenshots of tools to be used as thumbnails
+    tool_match = re.search(r"/tools/([^/]+)", url)
+    if tool_match and status == 200:
+        tool_id = tool_match.group(1)
+        thumb_dir = Path(__file__).resolve().parents[2] / "assets" / "official" / "free_web_tools" / "static" / "thumbnails"
+        thumb_dir.mkdir(parents=True, exist_ok=True)
+        screenshot_path = thumb_dir / f"{tool_id}.png"
+        
+        # Wait for page layout/Vue hydration to settle
+        page.wait_for_timeout(1500)
+        page.screenshot(path=str(screenshot_path))
+        print(f"[Screenshot saved: {screenshot_path.name}]", end=" ")
 
     return {
         "url": url,

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "clock",
+    "name": "Live Clock (デジタル時計)",
+    "description": "美しくネオンが光る、デスクトップ表示にも最適なフル画面対応のデジタル時計。",
+    "enabled": true,
+    "icon": "⏰"
+  },
+  {
+    "id": "calculator",
+    "name": "電卓",
+    "description": "シンプルで使いやすい、レスポンシブな多機能Web電卓。",
+    "enabled": true,
+    "icon": "🧮"
+  },
+  {
+    "id": "stopwatch",
+    "name": "ストップウォッチ",
+    "description": "ラップタイム記録機能を備えた、高精度なデジタルストップウォッチ。",
+    "enabled": true,
+    "icon": "⏱️"
+  },
+  {
+    "id": "timer",
+    "name": "タイマー",
+    "description": "カウントダウンタイマー。ビジュアル通知やリセット機能もサポート。",
+    "enabled": true,
+    "icon": "⏳"
+  },
+  {
+    "id": "qr-code",
+    "name": "QRコードジェネレーター",
+    "description": "入力したテキストやURLから即座にQRコードを生成・ダウンロードできるツール。",
+    "enabled": true,
+    "icon": "📱"
+  }
+]
