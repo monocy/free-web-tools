@@ -1,0 +1,13 @@
+{
+    "name": "flask_server",
+    "description": "flask host asset (cgi template style): registers other assets' flask blueprints on one Flask app",
+    "package": {"id": "system.flask_server", "version": "0.1.0"},
+    "settings": {
+        "enabled": false,
+        "order": 10,
+        "port": 8802,
+        "threaded": false,
+        "capabilities": ["web"],
+        "priority": 5
+    }
+}

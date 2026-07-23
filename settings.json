@@ -1,0 +1,16 @@
+{
+  "asset_roots": [
+    "${project}/assets"
+  ],
+  "assets": {
+    "system/flask_server": {
+      "enabled": true,
+      "host": "127.0.0.1",
+      "port": 5042,
+      "debug": true
+    },
+    "official/web_tools_100x": {
+      "enabled": true
+    }
+  }
+}

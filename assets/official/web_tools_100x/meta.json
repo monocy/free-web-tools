@@ -1,0 +1,5 @@
+{
+  "key": "official/web_tools_100x",
+  "entry": "app.py",
+  "dependencies": ["system/flask_server"]
+}
