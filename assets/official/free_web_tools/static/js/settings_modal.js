@@ -14,7 +14,7 @@ export default {
       required: true
     }
   },
-  emits: ['close', 'reset'],
+  emits: ['close', 'reset', 'open-bg-modal'],
   delimiters: ['[[', ']]'],
   template: `
     <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60" @click.self="$emit('close')" v-cloak>
@@ -57,7 +57,12 @@ export default {
 
           <!-- Custom Background -->
           <div class="border-t border-[var(--border-color)] pt-4 space-y-4">
-            <label class="block text-sm font-semibold text-[var(--text-muted)]">[[ t('bg_settings', 'Background Customization') ]]</label>
+            <div class="flex justify-between items-center">
+              <label class="block text-sm font-semibold text-[var(--text-muted)]">[[ t('bg_settings', 'Background Customization') ]]</label>
+              <button @click="$emit('open-bg-modal')" class="px-3 py-1.5 bg-teal-600 hover:bg-teal-500 text-xs font-bold text-[var(--text-main)] rounded-lg transition duration-200">
+                [[ t('change_bg', '背景画像を変更...') ]]
+              </button>
+            </div>
             
             <div>
               <span class="block text-xs text-[var(--text-muted)] mb-1">[[ t('bg_image_url', 'Background Image URL') ]]</span>

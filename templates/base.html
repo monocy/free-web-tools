@@ -89,7 +89,16 @@
       :is-open="showSettings" 
       @close="showSettings = false"
       @reset="resetSettings"
+      @open-bg-modal="isBgModalOpen = true"
     ></settings-modal>
+
+    <!-- Background Modal Component -->
+    <background-modal 
+      :settings="settings" 
+      :translations="translations" 
+      :is-open="isBgModalOpen" 
+      @close="isBgModalOpen = false"
+    ></background-modal>
 
     <!-- Floating Fullscreen Button -->
     <button 
@@ -105,16 +114,19 @@
 
   <script type="module">
   import SettingsModal from '/static/js/settings_modal.js';
+  import BackgroundModal from '/static/js/background_modal.js';
 
   const { createApp, ref, reactive, onMounted, watch } = Vue;
   createApp({
     delimiters: ['[[', ']]'],
     components: {
-      SettingsModal
+      SettingsModal,
+      BackgroundModal
     },
     setup() {
       const translations = ref({});
       const showSettings = ref(false);
+      const isBgModalOpen = ref(false);
       
       const settings = reactive({
         lang: 'en',
@@ -228,6 +240,7 @@
         settings,
         translations,
         showSettings,
+        isBgModalOpen,
         t,
         toggleFullscreen,
         resetSettings,

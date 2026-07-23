@@ -40,7 +40,13 @@
         "name": "Timer",
         "description": "Customizable countdown timer with alarm sound."
       }
-    }
+    },
+    "change_bg": "Change Background...",
+    "preset_images": "Preset Images",
+    "upload_image": "Upload Custom Image",
+    "drag_drop_text": "Drag & drop an image here, or click to browse",
+    "custom_images": "Custom Images",
+    "delete": "Delete"
   },
   "ja": {
     "app_title": "Free Web Tools",
@@ -83,6 +89,12 @@
         "name": "タイマー",
         "description": "アラーム音付きのカスタマイズ可能なカウントダウンタイマー。"
       }
-    }
+    },
+    "change_bg": "背景画像を変更...",
+    "preset_images": "プリセット画像",
+    "upload_image": "カスタム画像をアップロード",
+    "drag_drop_text": "画像をここにドラッグ＆ドロップ、またはクリックして選択",
+    "custom_images": "カスタム画像",
+    "delete": "削除"
   }
 }

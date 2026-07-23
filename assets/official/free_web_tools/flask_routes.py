@@ -172,6 +172,11 @@ def setup_routes(app, ctx, url_prefix: str):
         js_path = Path(__file__).resolve().parent / "static" / "js" / "settings_modal.js"
         return send_file(str(js_path), mimetype='application/javascript')
 
+    @bp.get("/static/js/background_modal.js")
+    def get_bg_js():
+        js_path = Path(__file__).resolve().parent / "static" / "js" / "background_modal.js"
+        return send_file(str(js_path), mimetype='application/javascript')
+
     @bp.get("/i18n.json")
     def get_i18n():
         i18n_path = Path(__file__).resolve().parent / "i18n.json"
