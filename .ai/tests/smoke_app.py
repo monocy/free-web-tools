@@ -24,7 +24,7 @@ def main():
     client = app.test_client()
     rv = client.get("/")
     assert rv.status_code == 200
-    assert "Webツール集".encode("utf-8") in rv.data
+    assert "Free Web Tools".encode("utf-8") in rv.data
     print("[PASS] Smoke app check")
     
     kernel.unload()

@@ -8,7 +8,7 @@ def setup_routes(app, ctx, url_prefix: str):
     @bp.get("/")
     def index():
         meta = {
-            "site_title": "Webツール集",
+            "site_title": "Free Web Tools",
             "slogan": "便利ツールを1箇所に集約したWebアプリ集"
         }
         tools = [
