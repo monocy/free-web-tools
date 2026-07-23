@@ -1,6 +1,7 @@
 # Tasks Summary
 
 ## 2026-07-24
+- [ ] portal_bg_controls_migration (Jules実行待ち)
 - [x] portal_catalog_ux_refactoring (完了)
 - [x] portal_bg_selector_enhancements (完了)
 - [x] portal_background_manager (完了)

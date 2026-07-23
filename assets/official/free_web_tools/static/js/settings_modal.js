@@ -63,27 +63,6 @@ export default {
                 [[ t('change_bg', '背景画像を変更...') ]]
               </button>
             </div>
-            
-            <div>
-              <span class="block text-xs text-[var(--text-muted)] mb-1">[[ t('bg_image_url', 'Background Image URL') ]]</span>
-              <input type="text" v-model="settings.bgUrl" placeholder="https://example.com/image.jpg" class="w-full px-3 py-2 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg text-sm focus:outline-none focus:border-teal-500 text-[var(--text-main)] theme-light:border-slate-300 theme-light:text-slate-800 theme-light:focus:border-blue-600">
-            </div>
-
-            <div>
-              <div class="flex justify-between text-xs text-[var(--text-muted)] mb-1">
-                <span>[[ t('bg_opacity', 'Opacity') ]]</span>
-                <span>[[ Math.round(settings.bgOpacity * 100) ]]%</span>
-              </div>
-              <input type="range" v-model.number="settings.bgOpacity" min="0" max="1" step="0.05" class="w-full accent-teal-500 theme-light:accent-blue-600">
-            </div>
-
-            <div>
-              <div class="flex justify-between text-xs text-[var(--text-muted)] mb-1">
-                <span>[[ t('bg_blur', 'Blur') ]]</span>
-                <span>[[ settings.bgBlur ]]px</span>
-              </div>
-              <input type="range" v-model.number="settings.bgBlur" min="0" max="30" step="1" class="w-full accent-teal-500 theme-light:accent-blue-600">
-            </div>
           </div>
         </div>
 

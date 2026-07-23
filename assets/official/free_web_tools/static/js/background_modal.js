@@ -115,6 +115,58 @@ export default {
               </div>
             </div>
           </div>
+
+          <!-- Adjustments (URL, Opacity, Blur) -->
+          <div class="border-t border-[var(--border-color)] pt-4 space-y-4">
+            <label class="block text-sm font-semibold text-[var(--text-muted)]">[[ t('bg_adjustments', 'Adjustment Controls') ]]</label>
+            
+            <!-- Image URL Input -->
+            <div class="space-y-1">
+              <span class="block text-xs font-medium text-[var(--text-muted)]">[[ t('bg_image_url', 'Background Image URL') ]]</span>
+              <div class="relative rounded-lg shadow-sm">
+                <input 
+                  type="text" 
+                  v-model="settings.bgUrl" 
+                  placeholder="https://example.com/image.jpg" 
+                  class="w-full px-3 py-2 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 text-[var(--text-main)] transition duration-150 theme-light:border-slate-300 theme-light:text-slate-800 theme-light:focus:border-blue-600 theme-light:focus:ring-blue-600/20"
+                >
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Opacity Slider -->
+              <div class="p-3 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl theme-light:bg-slate-50 theme-light:border-slate-200">
+                <div class="flex justify-between text-xs font-medium text-[var(--text-muted)] mb-2">
+                  <span>[[ t('bg_opacity', 'Opacity') ]]</span>
+                  <span class="font-bold text-[var(--text-main)]">[[ Math.round(settings.bgOpacity * 100) ]]%</span>
+                </div>
+                <input 
+                  type="range" 
+                  v-model.number="settings.bgOpacity" 
+                  min="0" 
+                  max="1" 
+                  step="0.05" 
+                  class="w-full h-1.5 bg-[var(--border-color)] rounded-lg appearance-none cursor-pointer accent-teal-500 theme-light:accent-blue-600 theme-light:bg-slate-200"
+                >
+              </div>
+
+              <!-- Blur Slider -->
+              <div class="p-3 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl theme-light:bg-slate-50 theme-light:border-slate-200">
+                <div class="flex justify-between text-xs font-medium text-[var(--text-muted)] mb-2">
+                  <span>[[ t('bg_blur', 'Blur') ]]</span>
+                  <span class="font-bold text-[var(--text-main)]">[[ settings.bgBlur ]]px</span>
+                </div>
+                <input 
+                  type="range" 
+                  v-model.number="settings.bgBlur" 
+                  min="0" 
+                  max="20" 
+                  step="1" 
+                  class="w-full h-1.5 bg-[var(--border-color)] rounded-lg appearance-none cursor-pointer accent-teal-500 theme-light:accent-blue-600 theme-light:bg-slate-200"
+                >
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="mt-8 flex justify-end">
