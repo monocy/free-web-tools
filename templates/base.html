@@ -56,9 +56,19 @@
         <a href="/" class="text-xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
           [[ t('app_title', '{{ meta.site_title }}') ]]
         </a>
-        <button @click="showSettings = true" class="p-2 text-[var(--text-muted)] hover:text-[var(--text-muted)] dark:hover:text-[var(--text-main)] transition duration-200">
-          <svg class="w-6 h-6 animate-[spin_10s_linear_infinite] hover:animate-[spin_2s_linear_infinite]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-        </button>
+        <div class="flex items-center gap-2">
+          <button @click="toggleTheme" class="p-2 text-[var(--text-muted)] hover:text-[var(--text-main)] transition duration-200" :title="t('theme_toggle', 'Toggle Theme')">
+            <svg v-if="settings.theme === 'dark' || settings.theme === 'neon'" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+            </svg>
+            <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </button>
+          <button @click="showSettings = true" class="p-2 text-[var(--text-muted)] hover:text-[var(--text-muted)] dark:hover:text-[var(--text-main)] transition duration-200">
+            <svg class="w-6 h-6 animate-[spin_10s_linear_infinite] hover:animate-[spin_2s_linear_infinite]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -72,209 +82,159 @@
       </div>
     </footer>
 
-    <!-- Settings Modal -->
-    <div v-if="showSettings" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" @click.self="showSettings = false" v-cloak>
-      <div class="modal-content w-full max-w-md p-6 rounded-2xl border bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-main)] bg-[var(--bg-card)] border-[var(--border-color)] text-[var(--text-main)] shadow-2xl relative">
-        <h3 class="text-xl font-bold mb-6 flex items-center justify-between">
-          <span>[[ t('settings', 'Settings') ]]</span>
-          <button @click="showSettings = false" class="text-[var(--text-muted)] hover:text-[var(--text-main)]">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-          </button>
-        </h3>
-        
-        <div class="space-y-6">
-          <!-- Language -->
-          <div>
-            <label class="block text-sm font-semibold text-[var(--text-muted)] mb-2">[[ t('lang', 'Language') ]]</label>
-            <div class="flex gap-4">
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="radio" v-model="settings.lang" value="ja" class="accent-teal-500">
-                <span>[[ t('lang_ja', '日本語') ]]</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="radio" v-model="settings.lang" value="en" class="accent-teal-500">
-                <span>[[ t('lang_en', 'English') ]]</span>
-              </label>
-            </div>
-          </div>
+    <!-- Settings Modal Component -->
+    <settings-modal 
+      :settings="settings" 
+      :translations="translations" 
+      :is-open="showSettings" 
+      @close="showSettings = false"
+      @reset="resetSettings"
+    ></settings-modal>
 
-          <!-- Theme -->
-          <div>
-            <label class="block text-sm font-semibold text-[var(--text-muted)] mb-2">[[ t('theme', 'Theme') ]]</label>
-            <div class="flex gap-4">
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="radio" v-model="settings.theme" value="dark" class="accent-teal-500">
-                <span>[[ t('theme_dark', 'Dark') ]]</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="radio" v-model="settings.theme" value="light" class="accent-teal-500">
-                <span>[[ t('theme_light', 'Light') ]]</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="radio" v-model="settings.theme" value="neon" class="accent-teal-500">
-                <span>[[ t('theme_neon', 'Neon') ]]</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Fullscreen -->
-          <div>
-            <label class="block text-sm font-semibold text-[var(--text-muted)] mb-2">[[ t('fullscreen', 'Fullscreen') ]]</label>
-            <button @click="toggleFullscreen" class="px-4 py-2 bg-[var(--bg-card)] hover:bg-slate-700 bg-[var(--bg-card)] dark:hover:bg-slate-700 text-sm font-semibold rounded-lg flex items-center gap-2 transition duration-200 w-full justify-center">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"></path></svg>
-              [[ t('fullscreen_toggle', 'Toggle Fullscreen') ]]
-            </button>
-          </div>
-
-          <!-- Custom Background -->
-          <div class="border-t border-[var(--border-color)] pt-4 space-y-4">
-            <label class="block text-sm font-semibold text-[var(--text-muted)]">[[ t('bg_settings', 'Background Customization') ]]</label>
-            
-            <div>
-              <span class="block text-xs text-[var(--text-muted)] mb-1">[[ t('bg_image_url', 'Background Image URL') ]]</span>
-              <input type="text" v-model="settings.bgUrl" placeholder="https://example.com/image.jpg" class="w-full px-3 py-2 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg text-sm focus:outline-none focus:border-teal-500 text-[var(--text-main)]">
-            </div>
-
-            <div>
-              <div class="flex justify-between text-xs text-[var(--text-muted)] mb-1">
-                <span>[[ t('bg_opacity', 'Opacity') ]]</span>
-                <span>[[ Math.round(settings.bgOpacity * 100) ]]%</span>
-              </div>
-              <input type="range" v-model.number="settings.bgOpacity" min="0" max="1" step="0.05" class="w-full accent-teal-500">
-            </div>
-
-            <div>
-              <div class="flex justify-between text-xs text-[var(--text-muted)] mb-1">
-                <span>[[ t('bg_blur', 'Blur') ]]</span>
-                <span>[[ settings.bgBlur ]]px</span>
-              </div>
-              <input type="range" v-model.number="settings.bgBlur" min="0" max="30" step="1" class="w-full accent-teal-500">
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-8 flex justify-end">
-          <button @click="showSettings = false" class="px-5 py-2 bg-teal-600 hover:bg-teal-500 text-sm font-bold text-[var(--text-main)] rounded-xl transition duration-200">
-            [[ t('close', 'Close') ]]
-          </button>
-        </div>
-      </div>
-    </div>
+    <!-- Floating Fullscreen Button -->
+    <button 
+      @click="toggleFullscreen" 
+      class="fixed bottom-6 right-6 z-40 p-4 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-400 hover:to-blue-400 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center focus:outline-none"
+      :title="t('fullscreen_toggle', 'Toggle Fullscreen')"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"></path>
+      </svg>
+    </button>
   </div>
 
-  <script>
-  (() => {
-    const { createApp, ref, reactive, onMounted, watch } = Vue;
-    createApp({
-      delimiters: ['[[', ']]'],
-      setup() {
-        const translations = ref({});
-        const showSettings = ref(false);
-        
-        const settings = reactive({
-          lang: 'en',
-          theme: 'dark',
-          bgUrl: '',
-          bgOpacity: 0.3,
-          bgBlur: 10,
-          custom: {}
-        });
+  <script type="module">
+  import SettingsModal from '/static/js/settings_modal.js';
 
-        const loadTranslations = async () => {
+  const { createApp, ref, reactive, onMounted, watch } = Vue;
+  createApp({
+    delimiters: ['[[', ']]'],
+    components: {
+      SettingsModal
+    },
+    setup() {
+      const translations = ref({});
+      const showSettings = ref(false);
+      
+      const settings = reactive({
+        lang: 'en',
+        theme: 'dark',
+        bgUrl: '',
+        bgOpacity: 0.3,
+        bgBlur: 10,
+        custom: {}
+      });
+
+      const loadTranslations = async () => {
+        try {
+          const res = await fetch('/i18n.json');
+          if (res.ok) {
+            translations.value = await res.json();
+          }
+        } catch (e) {
+          console.error('Failed to load translations', e);
+        }
+      };
+
+      const loadSettings = () => {
+        const stored = localStorage.getItem('tool-settings');
+        if (stored) {
           try {
-            const res = await fetch('/i18n.json');
-            if (res.ok) {
-              translations.value = await res.json();
-            }
+            const parsed = JSON.parse(stored);
+            Object.assign(settings, parsed);
           } catch (e) {
-            console.error('Failed to load translations', e);
+            console.error('Failed to parse settings', e);
           }
-        };
+        } else {
+          const browserLang = navigator.language || '';
+          settings.lang = browserLang.startsWith('ja') ? 'ja' : 'en';
+        }
+      };
 
-        const loadSettings = () => {
-          const stored = localStorage.getItem('tool-settings');
-          if (stored) {
-            try {
-              const parsed = JSON.parse(stored);
-              Object.assign(settings, parsed);
-            } catch (e) {
-              console.error('Failed to parse settings', e);
-            }
-          } else {
-            const browserLang = navigator.language || '';
-            settings.lang = browserLang.startsWith('ja') ? 'ja' : 'en';
-          }
-        };
+      const saveSettings = () => {
+        localStorage.setItem('tool-settings', JSON.stringify(settings));
+      };
 
-        const saveSettings = () => {
-          localStorage.setItem('tool-settings', JSON.stringify(settings));
-        };
+      const applyTheme = (themeName) => {
+        const root = document.documentElement;
+        root.classList.remove('theme-light', 'theme-neon', 'dark');
+        if (themeName === 'light') {
+          root.classList.add('theme-light');
+        } else if (themeName === 'neon') {
+          root.classList.add('theme-neon');
+          root.classList.add('dark');
+        } else {
+          root.classList.add('dark');
+        }
+      };
 
-        const applyTheme = (themeName) => {
-          const root = document.documentElement;
-          root.classList.remove('theme-light', 'theme-neon', 'dark');
-          if (themeName === 'light') {
-            root.classList.add('theme-light');
-          } else if (themeName === 'neon') {
-            root.classList.add('theme-neon');
-            root.classList.add('dark');
-          } else {
-            root.classList.add('dark');
-          }
-        };
+      watch(() => settings.theme, (newTheme) => {
+        applyTheme(newTheme);
+        saveSettings();
+      });
 
-        watch(() => settings.theme, (newTheme) => {
-          applyTheme(newTheme);
-          saveSettings();
-        });
+      watch(() => settings.lang, (newLang) => {
+        document.documentElement.lang = newLang;
+        saveSettings();
+      });
 
-        watch(() => settings.lang, (newLang) => {
-          document.documentElement.lang = newLang;
-          saveSettings();
-        });
+      watch(() => settings.bgUrl, saveSettings);
+      watch(() => settings.bgOpacity, saveSettings);
+      watch(() => settings.bgBlur, saveSettings);
 
-        watch(() => settings.bgUrl, saveSettings);
-        watch(() => settings.bgOpacity, saveSettings);
-        watch(() => settings.bgBlur, saveSettings);
+      onMounted(async () => {
+        loadSettings();
+        applyTheme(settings.theme);
+        document.documentElement.lang = settings.lang;
+        await loadTranslations();
+      });
 
-        onMounted(async () => {
-          loadSettings();
-          applyTheme(settings.theme);
-          document.documentElement.lang = settings.lang;
-          await loadTranslations();
-        });
+      const t = (key, fallback = '') => {
+        const parts = key.split('.');
+        let current = translations.value[settings.lang];
+        if (!current) return fallback || key;
+        for (const part of parts) {
+          current = current[part];
+          if (current === undefined) return fallback || key;
+        }
+        return current;
+      };
 
-        const t = (key, fallback = '') => {
-          const parts = key.split('.');
-          let current = translations.value[settings.lang];
-          if (!current) return fallback || key;
-          for (const part of parts) {
-            current = current[part];
-            if (current === undefined) return fallback || key;
-          }
-          return current;
-        };
+      const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(err => {
+            console.error(err);
+          });
+        } else {
+          document.exitFullscreen();
+        }
+      };
 
-        const toggleFullscreen = () => {
-          if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen().catch(err => {
-              console.error(err);
-            });
-          } else {
-            document.exitFullscreen();
-          }
-        };
+      const resetSettings = () => {
+        localStorage.removeItem('tool-settings');
+        settings.lang = (navigator.language || '').startsWith('ja') ? 'ja' : 'en';
+        settings.theme = 'dark';
+        settings.bgUrl = '';
+        settings.bgOpacity = 0.3;
+        settings.bgBlur = 10;
+        applyTheme(settings.theme);
+      };
 
-        return {
-          settings,
-          translations,
-          showSettings,
-          t,
-          toggleFullscreen
-        };
-      }
-    }).mount('#layout-app');
-  })();
-  </script>
+      const toggleTheme = () => {
+        settings.theme = settings.theme === 'light' ? 'dark' : 'light';
+      };
+
+      return {
+        settings,
+        translations,
+        showSettings,
+        t,
+        toggleFullscreen,
+        resetSettings,
+        toggleTheme
+      };
+    }
+  }).mount('#layout-app');
+</script>
 </body>
 </html>
