@@ -1,6 +1,7 @@
 # Tasks Summary
 
 ## 2026-07-24
+- [x] portal_header_above_scrollbar (完了)
 - [x] portal_scrollbar_overlay_fix (完了)
 - [x] portal_scrollbar_styling (完了)
 - [x] portal_fullscreen_header_toggle (完了)
