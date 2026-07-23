@@ -9,3 +9,4 @@
 - [x] 全ツール（clock, calculator, qr-code, stopwatch, timer）に最新の共通アセットテンプレート仕様を完全に適用する
 - [x] Julesが 'jules' CLI コマンドを直接実行できるようにルールファイル (GEMINI.md, AGENTS.md) を修正する
 - [x] Jules CLI を使用して、全ツールの多言語対応およびテーマ切り替えの整合性を再確認・最適化する
+- [x] 親サイト（ポータル）自体の多言語対応（i18n）、カラーテーマ切り替え、背景設定、LocalStorage保存、設定モーダル、全画面対応を実装する
