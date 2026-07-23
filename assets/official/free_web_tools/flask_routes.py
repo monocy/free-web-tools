@@ -167,4 +167,11 @@ def setup_routes(app, ctx, url_prefix: str):
             
         return send_file(str(img_path), mimetype='image/png')
 
+    @bp.get("/i18n.json")
+    def get_i18n():
+        i18n_path = Path(__file__).resolve().parent / "i18n.json"
+        if not i18n_path.is_file():
+            abort(404)
+        return send_file(str(i18n_path), mimetype='application/json')
+
     app.register_blueprint(bp)

@@ -1,0 +1,88 @@
+{
+  "en": {
+    "app_title": "Free Web Tools",
+    "slogan": "A collection of useful web tools in one place.",
+    "gen3_portal": "Gen3 Asset Portal",
+    "active": "ACTIVE",
+    "open_tool": "Open Tool",
+    "settings": "Settings",
+    "theme": "Theme",
+    "theme_light": "Light",
+    "theme_dark": "Dark",
+    "lang": "Language",
+    "lang_en": "English",
+    "lang_ja": "Japanese",
+    "bg_settings": "Background Customization",
+    "bg_image_url": "Background Image URL",
+    "bg_opacity": "Opacity",
+    "bg_blur": "Blur",
+    "fullscreen": "Fullscreen",
+    "fullscreen_toggle": "Toggle Fullscreen",
+    "close": "Close",
+    "tools": {
+      "clock": {
+        "name": "Live Clock",
+        "description": "Beautiful neon-glowing digital clock with fullscreen support, ideal for desktop display."
+      },
+      "calculator": {
+        "name": "Calculator",
+        "description": "Simple and clean calculator for daily computations."
+      },
+      "qr-code": {
+        "name": "QR Code Generator",
+        "description": "Generate QR codes from URLs or text quickly."
+      },
+      "stopwatch": {
+        "name": "Stopwatch",
+        "description": "High-precision stopwatch with lap timing."
+      },
+      "timer": {
+        "name": "Timer",
+        "description": "Customizable countdown timer with alarm sound."
+      }
+    }
+  },
+  "ja": {
+    "app_title": "Free Web Tools",
+    "slogan": "便利ツールを1箇所に集約したWebアプリ集",
+    "gen3_portal": "Gen3 アセットポータル",
+    "active": "稼働中",
+    "open_tool": "ツールを開く",
+    "settings": "設定",
+    "theme": "テーマ",
+    "theme_light": "ライト",
+    "theme_dark": "ダーク",
+    "lang": "言語",
+    "lang_en": "英語",
+    "lang_ja": "日本語",
+    "bg_settings": "背景カスタマイズ",
+    "bg_image_url": "背景画像 URL",
+    "bg_opacity": "不透明度",
+    "bg_blur": "ぼかし",
+    "fullscreen": "全画面表示",
+    "fullscreen_toggle": "全画面切り替え",
+    "close": "閉じる",
+    "tools": {
+      "clock": {
+        "name": "デジタル時計",
+        "description": "美しくネオンが光る、デスクトップ表示にも最適なフル画面対応のデジタル時計。"
+      },
+      "calculator": {
+        "name": "電卓",
+        "description": "日常の計算に最適な、シンプルで使いやすい電卓。"
+      },
+      "qr-code": {
+        "name": "QRコード生成",
+        "description": "URLやテキストから簡単にQRコードを生成します。"
+      },
+      "stopwatch": {
+        "name": "ストップウォッチ",
+        "description": "ラップタイム計測が可能な高精度ストップウォッチ。"
+      },
+      "timer": {
+        "name": "タイマー",
+        "description": "アラーム音付きのカスタマイズ可能なカウントダウンタイマー。"
+      }
+    }
+  }
+}
