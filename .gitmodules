@@ -1,0 +1,3 @@
+[submodule "assets/official/free_web_tools/tools/clock"]
+	path = assets/official/free_web_tools/tools/clock
+	url = https://github.com/monocy/tool-clock.git

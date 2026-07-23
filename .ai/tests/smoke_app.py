@@ -25,6 +25,11 @@ def main():
     rv = client.get("/")
     assert rv.status_code == 200
     assert "Free Web Tools".encode("utf-8") in rv.data
+    
+    # clock tool check
+    rv = client.get("/tools/clock")
+    assert rv.status_code == 200
+    assert "Premium Clock".encode("utf-8") in rv.data
     print("[PASS] Smoke app check")
     
     kernel.unload()
