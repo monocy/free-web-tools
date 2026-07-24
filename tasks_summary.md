@@ -1,6 +1,7 @@
 # Tasks Summary
 
 ## 2026-07-24
+- [x] portal_calculator_unblock_fix (完了)
 - [x] portal_template_component_modularization (完了)
 - [x] portal_local_file_cors_fallback (完了)
 - [x] portal_assets_public_url_cors_fix (完了)
