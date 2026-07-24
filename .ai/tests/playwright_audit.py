@@ -27,6 +27,7 @@ SITE_MAPS = {
         "http://127.0.0.1:5042/",
         "http://127.0.0.1:5042/tools/clock",
         "http://127.0.0.1:5042/tools/calculator",
+        "http://127.0.0.1:5042/tools/calculator/dev.html",
         "http://127.0.0.1:5042/tools/qr-code",
         "http://127.0.0.1:5042/tools/stopwatch",
         "http://127.0.0.1:5042/tools/timer"
@@ -90,7 +91,9 @@ def audit_url(page, url):
         if url.endswith("/") or url.endswith(":5042"):
             jpg_filename = "portal_index.jpg"
         elif "/tools/" in url:
-            if tool_match:
+            if "dev.html" in url:
+                jpg_filename = "dev_standalone_result.jpg"
+            elif tool_match:
                 jpg_filename = f"{tool_match.group(1)}.jpg"
         
         if jpg_filename:

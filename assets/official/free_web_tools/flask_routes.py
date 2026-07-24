@@ -145,6 +145,29 @@ def setup_routes(app, ctx, url_prefix: str):
             
         return send_file(str(tool_index), mimetype='text/html')
 
+    @bp.get("/tools/<tool_id>/<path:filename>")
+    def render_tool_file(tool_id: str, filename: str):
+        if ".." in tool_id or "/" in tool_id or "\\" in tool_id or ".." in filename:
+            abort(400)
+            
+        file_path = tools_dir / tool_id / filename
+        if not file_path.is_file():
+            abort(404)
+            
+        # Determine mimetype
+        ext = file_path.suffix.lower()
+        mimetype = None
+        if ext == '.js':
+            mimetype = 'application/javascript'
+        elif ext == '.html':
+            mimetype = 'text/html'
+        elif ext == '.json':
+            mimetype = 'application/json'
+        elif ext == '.css':
+            mimetype = 'text/css'
+            
+        return send_file(str(file_path), mimetype=mimetype)
+
     @bp.get("/api/tools")
     def api_tools():
         catalog = load_catalog_from_path()
