@@ -162,7 +162,7 @@
         const t = (key, fallback = '') => {
           const parts = key.split('.');
           const currentLang = props.settings.lang;
-          const trans = props.translations.value || props.translations;
+          const trans = props.translations ? (props.translations.value || props.translations) : {};
           let current = trans[currentLang];
           if (!current) return fallback || key;
           for (const part of parts) {
