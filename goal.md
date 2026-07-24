@@ -2,7 +2,7 @@
 
 ## Status
 
-`in_progress`
+`completed`
 
 ## Objective
 
@@ -16,21 +16,16 @@ Google Driveの「Webツール集_spark」のデータ（Webツール一覧.gshe
 
 ## Next actions
 
-1. Update the "big-text" tool (`assets/official/free_web_tools/tools/big-text`):
-   - Modify the layout so clicking the big text area toggles an editing window/panel that slides up or appears at the bottom.
-   - Implement "close-on-click-outside" behavior for this panel.
-   - Ensure the editing panel is inline scrollable when content overflows.
-   - Use a clear, native color picker for the text color settings (making it the primary color picker UI).
-   - Ensure these changes pass local smoke and verification tests.
+1. Goal is fully completed!
 
 ## Acceptance criteria
 
 - [x] Playwright quality audit PASS on all routes
 - [x] Clock tool (tools/clock) is integrated and passes Playwright audit
-- [ ] Dynamic tool catalog is read from Google Drive index and displayed with working navigation
-- [ ] Implement dark-mode aesthetic layout with grid list
+- [x] Dynamic tool catalog is read from Google Drive index and displayed with working navigation
+- [x] Implement dark-mode aesthetic layout with grid list
 - [x] "Big Text" tool (`big-text`) is created as a submodule and registered in catalog.
-- [ ] "Big Text" editing panel opens when clicking the big text area, and closes when clicking outside the panel.
-- [ ] "Big Text" editing panel supports inline scrolling.
-- [ ] Text color setting in "Big Text" utilizes a color picker UI.
-- [ ] "Big Text" passes the local Playwright/smoke tests successfully.
+- [x] "Big Text" editing panel opens when clicking the big text area, and closes when clicking outside the panel.
+- [x] "Big Text" editing panel supports inline scrolling.
+- [x] Text color setting in "Big Text" utilizes a color picker UI.
+- [x] "Big Text" passes the local Playwright/smoke tests successfully.
