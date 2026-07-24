@@ -64,3 +64,18 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(100, 116, 139, 0.7);
 }
+
+/* Glass Panel utility */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+}
+
+/* Neon Shadow utility */
+.neon-shadow {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 
+              0 0 20px 0 rgba(20, 184, 166, 0.15);
+}
+
