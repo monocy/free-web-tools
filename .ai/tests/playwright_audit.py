@@ -74,7 +74,7 @@ def audit_url(page, url):
     tool_match = re.search(r"/tools/([^/]+)", url)
     if tool_match and status == 200:
         tool_id = tool_match.group(1)
-        thumb_dir = Path(__file__).resolve().parents[2] / "assets" / "official" / "free_web_tools" / "static" / "thumbnails"
+        thumb_dir = Path(__file__).resolve().parents[2] / "static" / "thumbnails"
         thumb_dir.mkdir(parents=True, exist_ok=True)
         screenshot_path = thumb_dir / f"{tool_id}.png"
         

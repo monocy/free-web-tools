@@ -7,7 +7,8 @@
       "enabled": true,
       "host": "127.0.0.1",
       "port": 5042,
-      "debug": true
+      "debug": true,
+      "static_folder": "static"
     },
     "official/free_web_tools": {
       "enabled": true

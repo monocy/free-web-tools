@@ -156,36 +156,7 @@ def setup_routes(app, ctx, url_prefix: str):
                     tools_list.append(tool_id)
         return jsonify({"status": "ok", "tools": tools_list})
 
-    @bp.get("/static/thumbnails/<tool_id>.png")
-    def get_thumbnail(tool_id: str):
-        if ".." in tool_id or "/" in tool_id or "\\" in tool_id:
-            abort(400)
-            
-        img_path = Path(__file__).resolve().parent / "static" / "thumbnails" / f"{tool_id}.png"
-        if not img_path.is_file():
-            abort(404)
-            
-        return send_file(str(img_path), mimetype='image/png')
 
-    @bp.get("/static/css/portal.css")
-    def get_portal_css():
-        css_path = Path(__file__).resolve().parent / "static" / "css" / "portal.css"
-        return send_file(str(css_path), mimetype='text/css')
-
-    @bp.get("/static/js/portal_common.js")
-    def get_portal_common_js():
-        js_path = Path(__file__).resolve().parent / "static" / "js" / "portal_common.js"
-        return send_file(str(js_path), mimetype='application/javascript')
-
-    @bp.get("/static/js/settings_modal.js")
-    def get_js():
-        js_path = Path(__file__).resolve().parent / "static" / "js" / "settings_modal.js"
-        return send_file(str(js_path), mimetype='application/javascript')
-
-    @bp.get("/static/js/background_modal.js")
-    def get_bg_js():
-        js_path = Path(__file__).resolve().parent / "static" / "js" / "background_modal.js"
-        return send_file(str(js_path), mimetype='application/javascript')
 
     @bp.get("/i18n.json")
     def get_i18n():
@@ -193,5 +164,14 @@ def setup_routes(app, ctx, url_prefix: str):
         if not i18n_path.is_file():
             abort(404)
         return send_file(str(i18n_path), mimetype='application/json')
+
+    @app.errorhandler(Exception)
+    def handle_exception(e):
+        import traceback
+        with open("E:/Tfiles/Tbox/Sites/free-web-tools/flask_error.log", "a", encoding="utf-8") as f:
+            f.write(f"Exception: {str(e)}\n")
+            f.write(traceback.format_exc())
+            f.write("\n" + "="*40 + "\n")
+        return f"Error: {str(e)}", 500
 
     app.register_blueprint(bp)
