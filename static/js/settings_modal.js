@@ -7,7 +7,8 @@ export default {
     },
     translations: {
       type: Object,
-      required: true
+      required: false,
+      default: () => ({})
     },
     isOpen: {
       type: Boolean,
@@ -89,7 +90,9 @@ export default {
   methods: {
     t(key, fallback = '') {
       const parts = key.split('.');
-      let current = this.translations[this.settings.lang];
+      const currentLang = this.settings && this.settings.lang ? this.settings.lang : 'en';
+      const translations = this.translations || {};
+      let current = translations[currentLang];
       if (!current) return fallback || key;
       for (const part of parts) {
         current = current[part];

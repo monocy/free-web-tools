@@ -163,29 +163,15 @@
         components: { SettingsModal, BackgroundModal },
         compilerOptions: { delimiters: ['[[', ']]'] },
         setup() {
-          const translations = ref({});
-          const portal = usePortalCommon(translations, (typeof DEFAULT_SETTINGS !== 'undefined' && DEFAULT_SETTINGS.custom) || {});
-          const { settings, showSettings: isSettingsOpen, isBgModalOpen, isFullscreen, t, toggleFullscreen } = portal;
+          const portal = usePortalCommon((typeof DEFAULT_SETTINGS !== 'undefined' && DEFAULT_SETTINGS.custom) || {});
+          const { settings, showSettings: isSettingsOpen, isBgModalOpen, isFullscreen, translations, t, toggleFullscreen } = portal;
 
-          // Load translations from local i18n.json
-          const loadTranslations = async () => {
-            try {
-              const res = await fetch('./i18n.json');
-              translations.value = await res.json();
-            } catch (e) {
-              console.error("Failed to load local translations", e);
-            }
-          };
-
-          // Translate helper function
-          // Theme application logic
           const closeSettings = () => {
             isSettingsOpen.value = false;
           };
 
           const resetToDefault = () => {
             portal.resetSettings();
-            updateDocumentMetadata();
           };
 
           const setTheme = (themeName) => {
@@ -195,8 +181,8 @@
           const setLang = (langCode) => {
             settings.lang = langCode;
           };
-onMounted(() => {
-            loadTranslations();
+
+          onMounted(() => {
             
           });
 
@@ -205,6 +191,7 @@ onMounted(() => {
             isBgModalOpen,
             isFullscreen,
             settings,
+            translations,
             t,
             setTheme,
             closeSettings,
