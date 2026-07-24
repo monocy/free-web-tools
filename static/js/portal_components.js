@@ -16,12 +16,12 @@ const PortalHeader = {
   },
   emits: ['toggle-fullscreen', 'toggle-theme', 'open-settings'],
   template: `
-    <header v-show="!isFullscreen" class="border-b border-[var(--border-color)] bg-[var(--bg-header)] backdrop-blur-lg fixed top-0 left-0 right-0 w-full z-[9999]" v-cloak>
+    <header v-show="!isFullscreen" class="fixed top-0 left-0 right-0 w-full z-[9999] bg-transparent border-none pointer-events-none" v-cloak>
       <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="../../" class="text-xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
+        <a href="../../" class="text-xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 pointer-events-auto">
           [[ t('app_title', 'Free Web Tools') ]]
         </a>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 pointer-events-auto">
           <button @click="$emit('toggle-theme')" class="p-2 text-[var(--text-muted)] hover:text-[var(--text-main)] theme-light:text-slate-700 theme-light:hover:text-slate-900 transition duration-200" :title="t('theme_toggle', 'Toggle Theme')">
             <svg v-if="settings.theme === 'dark' || settings.theme === 'neon'" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
@@ -57,13 +57,14 @@ const PortalHeader = {
 const PortalFooter = {
   name: 'PortalFooter',
   template: `
-    <footer class="bg-transparent border-none py-4 mt-6 relative z-10" v-cloak>
-      <div class="max-w-6xl mx-auto px-4 text-center text-[11px] text-[var(--text-muted)] opacity-60">
+    <footer class="fixed bottom-4 left-0 right-0 z-30 pointer-events-none text-center" v-cloak>
+      <div class="text-[11px] text-[var(--text-muted)] opacity-60">
         &copy; 2026 Free Web Tools
       </div>
     </footer>
   `
 };
+
 
 const PortalControls = {
   name: 'PortalControls',
