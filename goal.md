@@ -16,13 +16,12 @@ Google Driveの「Webツール集_spark」のデータ（Webツール一覧.gshe
 
 ## Next actions
 
-1. Create and integrate a new tool "big-text" (大きなテキスト表示ツール):
-   - Scaffold a new GitHub repository `monocy/tool-bigtext` by copying the `tool-template` directory.
-   - Implement the "big-text" tool in `js/workspace.js` and `index.html` allowing settings for text size, color, font-family, text effects (shadow, glow), animations (e.g., bounce, fade, zoom, scroll), and orientation (vertical / horizontal).
-   - Implement localized strings in `i18n.json` for both Japanese (`ja`) and English (`en`).
-   - Add this tool to `assets/official/free_web_tools/tools/big-text` as a git submodule pointing to the new repository `https://github.com/monocy/tool-bigtext.git`.
-   - Update `assets/official/free_web_tools/Webツール一覧.json` to register the new tool.
-   - Verify the tool runs correctly and passes local smoke/Playwright tests.
+1. Update the "big-text" tool (`assets/official/free_web_tools/tools/big-text`):
+   - Modify the layout so clicking the big text area toggles an editing window/panel that slides up or appears at the bottom.
+   - Implement "close-on-click-outside" behavior for this panel.
+   - Ensure the editing panel is inline scrollable when content overflows.
+   - Use a clear, native color picker for the text color settings (making it the primary color picker UI).
+   - Ensure these changes pass local smoke and verification tests.
 
 ## Acceptance criteria
 
@@ -31,5 +30,7 @@ Google Driveの「Webツール集_spark」のデータ（Webツール一覧.gshe
 - [ ] Dynamic tool catalog is read from Google Drive index and displayed with working navigation
 - [ ] Implement dark-mode aesthetic layout with grid list
 - [x] "Big Text" tool (`big-text`) is created as a submodule and registered in catalog.
-- [x] "Big Text" tool supports size, color, font-family, effects, animations, and vertical/horizontal text flow.
-- [x] "Big Text" passes the local Playwright tests successfully.
+- [ ] "Big Text" editing panel opens when clicking the big text area, and closes when clicking outside the panel.
+- [ ] "Big Text" editing panel supports inline scrolling.
+- [ ] Text color setting in "Big Text" utilizes a color picker UI.
+- [ ] "Big Text" passes the local Playwright/smoke tests successfully.
