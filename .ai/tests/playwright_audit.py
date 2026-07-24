@@ -70,18 +70,35 @@ def audit_url(page, url):
     if page_errors:
         issues.append(f"Page Exceptions ({len(page_errors)}): {page_errors[0]}")
 
-    # Capture screenshots of tools to be used as thumbnails
-    tool_match = re.search(r"/tools/([^/]+)", url)
-    if tool_match and status == 200:
-        tool_id = tool_match.group(1)
-        thumb_dir = Path(__file__).resolve().parents[2] / "static" / "thumbnails"
-        thumb_dir.mkdir(parents=True, exist_ok=True)
-        screenshot_path = thumb_dir / f"{tool_id}.png"
-        
+    # Capture screenshots
+    if status == 200:
         # Wait for page layout/Vue hydration to settle
         page.wait_for_timeout(1500)
-        page.screenshot(path=str(screenshot_path))
-        print(f"[Screenshot saved: {screenshot_path.name}]", end=" ")
+        
+        # 1. Existing PNG thumbnail logic
+        tool_match = re.search(r"/tools/([^/]+)", url)
+        if tool_match:
+            tool_id = tool_match.group(1)
+            thumb_dir = Path(__file__).resolve().parents[2] / "static" / "thumbnails"
+            thumb_dir.mkdir(parents=True, exist_ok=True)
+            screenshot_path = thumb_dir / f"{tool_id}.png"
+            page.screenshot(path=str(screenshot_path))
+            print(f"[Screenshot saved: {screenshot_path.name}]", end=" ")
+
+        # 2. JPG screenshots for audit verification
+        jpg_filename = None
+        if url.endswith("/") or url.endswith(":5042"):
+            jpg_filename = "portal_index.jpg"
+        elif "/tools/" in url:
+            if tool_match:
+                jpg_filename = f"{tool_match.group(1)}.jpg"
+        
+        if jpg_filename:
+            screenshots_dir = Path(__file__).resolve().parents[2] / "screenshots"
+            screenshots_dir.mkdir(parents=True, exist_ok=True)
+            jpg_path = screenshots_dir / jpg_filename
+            page.screenshot(path=str(jpg_path), type="jpeg", quality=85)
+            print(f"[Audit JPG saved: {jpg_filename}]", end=" ")
 
     return {
         "url": url,
