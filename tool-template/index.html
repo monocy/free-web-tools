@@ -158,12 +158,20 @@
           const portal = usePortalCommon((typeof DEFAULT_SETTINGS !== 'undefined' && DEFAULT_SETTINGS.custom) || {});
           const { settings, showSettings: isSettingsOpen, isBgModalOpen, isFullscreen, translations, t, toggleFullscreen, toggleTheme } = portal;
 
+          const originalTitle = document.title;
+          const updateDocumentMetadata = () => {
+            const pageTitle = t('page_title');
+            document.title = (pageTitle === 'page_title' || !pageTitle) ? originalTitle : pageTitle;
+            document.documentElement.lang = settings.lang;
+          };
+
           const closeSettings = () => {
             isSettingsOpen.value = false;
           };
 
           const resetToDefault = () => {
             portal.resetSettings();
+            updateDocumentMetadata();
           };
 
           const setTheme = (themeName) => {
@@ -174,6 +182,11 @@
             settings.lang = langCode;
           };
 
+          // Watch translations and lang changes to reactively update document details
+          watch([translations, () => settings.lang], () => {
+            updateDocumentMetadata();
+          }, { deep: true, immediate: true });
+
           return {
             isSettingsOpen,
             isBgModalOpen,
@@ -182,6 +195,7 @@
             translations,
             t,
             setTheme,
+            setLang,
             closeSettings,
             resetToDefault,
             toggleFullscreen,
