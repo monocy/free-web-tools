@@ -11,10 +11,10 @@
   <!-- FontAwesome for Premium Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <script type="module">
-  import SettingsModal from 'https://stone.parallel.jp/free-web-tools/static/js/settings_modal.js';
-  import BackgroundModal from 'https://stone.parallel.jp/free-web-tools/static/js/background_modal.js';
-  import { usePortalCommon } from 'https://stone.parallel.jp/free-web-tools/static/js/portal_common.js';
+  <script src="../../static/js/portal_common.js"></script>
+  <script src="../../static/js/settings_modal.js"></script>
+  <script src="../../static/js/background_modal.js"></script>
+  <script>
 
     tailwind.config = {
       darkMode: 'class',
@@ -32,7 +32,7 @@
     }
   </script>
   
-  <link rel="stylesheet" href="https://stone.parallel.jp/free-web-tools/static/css/portal.css">
+  <link rel="stylesheet" href="../../static/css/portal.css">
   <script src="./js/workspace.js"></script>
   <style>
     /* CSS custom variables for reactive theme switcher */
@@ -117,10 +117,7 @@
     ></background-modal>
   </div>
 
-  <script type="module">
-    import SettingsModal from 'https://stone.parallel.jp/free-web-tools/static/js/settings_modal.js';
-    import BackgroundModal from 'https://stone.parallel.jp/free-web-tools/static/js/background_modal.js';
-    import { usePortalCommon } from 'https://stone.parallel.jp/free-web-tools/static/js/portal_common.js';
+  <script>
 
     (() => {
       const { createApp, ref, reactive, computed, onMounted, onUnmounted, watch, nextTick } = Vue;

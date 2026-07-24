@@ -67,7 +67,7 @@ const fallbackTranslations = {
   }
 };
 
-export function usePortalCommon(arg1 = {}, arg2 = {}) {
+function usePortalCommon(arg1 = {}, arg2 = {}) {
   let translationsRef;
   let defaultCustomSettings = {};
 

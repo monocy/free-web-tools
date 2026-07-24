@@ -1,4 +1,4 @@
-# [] portal_unify_legacy_script_loading
+# [x] portal_unify_legacy_script_loading
 
 ## タスク内容
 ポータル全体およびすべての個別ツール（およびテンプレート）において、アセットのロード方法から ES Modules（`import`/`export`）および `<script type="module">` を完全に排除し、相対パス基準のレガシーな標準 `<script>` タグによるグローバルロードに統一します。これにより、完全なオフライン環境やローカル直接起動（ダブルクリック）であっても、一切の CORS 制限を受けることなくポータルおよびツールが 100% 確実に動作するようにします。

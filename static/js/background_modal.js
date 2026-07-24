@@ -1,4 +1,4 @@
-export default {
+const BackgroundModal = {
   name: 'BackgroundModal',
   props: {
     settings: {

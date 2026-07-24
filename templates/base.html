@@ -93,43 +93,45 @@
     </button>
   </div>
 
-  <script type="module">
-  import SettingsModal from '/static/js/settings_modal.js';
-  import BackgroundModal from '/static/js/background_modal.js';
-  import { usePortalCommon } from '/static/js/portal_common.js';
+  <script src="/static/js/portal_common.js"></script>
+  <script src="/static/js/settings_modal.js"></script>
+  <script src="/static/js/background_modal.js"></script>
+  <script>
 
-  const { createApp, ref, onMounted } = Vue;
-  createApp({
-    delimiters: ['[[', ']]'],
-    components: {
-      SettingsModal,
-      BackgroundModal
-    },
-    setup() {
-      const translations = ref({});
-      const loadTranslations = async () => {
-        try {
-          const res = await fetch('/i18n.json');
-          if (res.ok) {
-            translations.value = await res.json();
+  (() => {
+    const { createApp, ref, onMounted } = Vue;
+    createApp({
+      delimiters: ['[[', ']]'],
+      components: {
+        SettingsModal,
+        BackgroundModal
+      },
+      setup() {
+        const translations = ref({});
+        const loadTranslations = async () => {
+          try {
+            const res = await fetch('/i18n.json');
+            if (res.ok) {
+              translations.value = await res.json();
+            }
+          } catch (e) {
+            console.error('Failed to load translations', e);
           }
-        } catch (e) {
-          console.error('Failed to load translations', e);
-        }
-      };
+        };
 
-      const portal = usePortalCommon(translations);
+        const portal = usePortalCommon(translations);
 
-      onMounted(async () => {
-        await loadTranslations();
-      });
+        onMounted(async () => {
+          await loadTranslations();
+        });
 
-      return {
-        translations,
-        ...portal
-      };
-    }
-  }).mount('#layout-app');
+        return {
+          translations,
+          ...portal
+        };
+      }
+    }).mount('#layout-app');
+  })();
 </script>
 </body>
 </html>

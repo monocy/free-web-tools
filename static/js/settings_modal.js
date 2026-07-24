@@ -1,4 +1,4 @@
-export default {
+const SettingsModal = {
   name: 'SettingsModal',
   props: {
     settings: {
