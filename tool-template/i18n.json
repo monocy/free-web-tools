@@ -1,7 +1,11 @@
 {
   "en": {
-    "tool_title": "Neon Digital Tool",
-    "description": "Premium multipurpose template for responsive standalone web tools.",
+    "page_title": "Hello World Tool - Free Web Tools",
+    "tool_title": "Hello World Tool",
+    "hello_title": "Hello, World!",
+    "hello_desc": "This is the simplest template for creating a new standalone tool.",
+    "interactive_demo": "Interactive Demo",
+    "click_me": "Click Me",
     "settings_title": "Settings",
     "theme_label": "Theme",
     "theme_dark": "Dark",
@@ -37,8 +41,12 @@
     "delete": "Delete"
   },
   "ja": {
-    "tool_title": "ネオン・デジタルツール",
-    "description": "レスポンシブなスタンドアロンツール用プレミアム雛形テンプレート。",
+    "page_title": "ハローワールドツール - Free Web Tools",
+    "tool_title": "ハローワールドツール",
+    "hello_title": "こんにちは、世界！",
+    "hello_desc": "これは新規のスタンドアロンツールを作成するための最もシンプルなテンプレートです。",
+    "interactive_demo": "インタラクティブデモ",
+    "click_me": "クリックしてね",
     "settings_title": "設定",
     "theme_label": "テーマ",
     "theme_dark": "ダーク",
