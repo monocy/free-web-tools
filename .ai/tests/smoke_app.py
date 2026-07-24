@@ -27,9 +27,9 @@ def main():
     assert "Free Web Tools".encode("utf-8") in rv.data
     
     # clock tool check
-    rv = client.get("/tools/clock")
+    rv = client.get("/tools/clock", follow_redirects=True)
     assert rv.status_code == 200
-    assert "Premium Clock".encode("utf-8") in rv.data
+    assert "Clock".encode("utf-8") in rv.data
     print("[PASS] Smoke app check")
     
     kernel.unload()

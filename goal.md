@@ -30,6 +30,6 @@ Google Driveの「Webツール集_spark」のデータ（Webツール一覧.gshe
 - [x] Clock tool (tools/clock) is integrated and passes Playwright audit
 - [ ] Dynamic tool catalog is read from Google Drive index and displayed with working navigation
 - [ ] Implement dark-mode aesthetic layout with grid list
-- [ ] "Big Text" tool (`big-text`) is created as a submodule and registered in catalog.
-- [ ] "Big Text" tool supports size, color, font-family, effects, animations, and vertical/horizontal text flow.
-- [ ] "Big Text" passes the local Playwright tests successfully.
+- [x] "Big Text" tool (`big-text`) is created as a submodule and registered in catalog.
+- [x] "Big Text" tool supports size, color, font-family, effects, animations, and vertical/horizontal text flow.
+- [x] "Big Text" passes the local Playwright tests successfully.

@@ -30,7 +30,9 @@ SITE_MAPS = {
         "http://127.0.0.1:5042/tools/calculator/dev.html",
         "http://127.0.0.1:5042/tools/qr-code",
         "http://127.0.0.1:5042/tools/stopwatch",
-        "http://127.0.0.1:5042/tools/timer"
+        "http://127.0.0.1:5042/tools/timer",
+        "http://127.0.0.1:5042/tools/big-text",
+        "http://127.0.0.1:5042/tools/big-text/dev.html"
     ],
 }
 

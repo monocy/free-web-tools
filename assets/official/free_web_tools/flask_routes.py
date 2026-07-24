@@ -134,6 +134,13 @@ def setup_routes(app, ctx, url_prefix: str):
 
     # 各ツールの配信ルート
     @bp.get("/tools/<tool_id>")
+    def render_tool_redirect(tool_id: str):
+        from flask import redirect, request
+        target = request.path + "/"
+        if request.query_string:
+            target += "?" + request.query_string.decode("utf-8")
+        return redirect(target)
+
     @bp.get("/tools/<tool_id>/")
     def render_tool(tool_id: str):
         if ".." in tool_id or "/" in tool_id or "\\" in tool_id:
@@ -190,11 +197,19 @@ def setup_routes(app, ctx, url_prefix: str):
 
     @app.errorhandler(Exception)
     def handle_exception(e):
+        from werkzeug.exceptions import HTTPException
+        if isinstance(e, HTTPException):
+            return e
+            
         import traceback
-        with open("E:/Tfiles/Tbox/Sites/free-web-tools/flask_error.log", "a", encoding="utf-8") as f:
-            f.write(f"Exception: {str(e)}\n")
-            f.write(traceback.format_exc())
-            f.write("\n" + "="*40 + "\n")
+        log_path = Path(__file__).resolve().parents[3] / "flask_error.log"
+        try:
+            with open(log_path, "a", encoding="utf-8") as f:
+                f.write(f"Exception: {str(e)}\n")
+                f.write(traceback.format_exc())
+                f.write("\n" + "="*40 + "\n")
+        except Exception:
+            pass
         return f"Error: {str(e)}", 500
 
     app.register_blueprint(bp)
