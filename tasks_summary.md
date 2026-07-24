@@ -1,6 +1,7 @@
 # Tasks Summary
 
 ## 2026-07-24
+- [ ] portal_unify_legacy_script_loading (Jules実行待ち)
 - [x] portal_dev_html_standalone_file_cors_fix (完了)
 - [x] portal_calculator_standalone_dev_mode (完了)
 - [x] portal_audit_jpg_screenshots (完了)
