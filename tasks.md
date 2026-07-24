@@ -37,3 +37,4 @@
 - [x] 電卓(calculator)をベースにしたVueコンポーネント設計のアプリテンプレートと開発ガイドを作成する
 - [x] 電卓(calculator)のtranslations prop未定義クラッシュバグを修正し、PlaywrightテストをPASSさせる
 - [x] 動作確認時の最後にブラウザ画面のスクリーンショットをJPG形式で保存する処理を組み込む
+- [x] 電卓(calculator)のVueコンポーネントをjs/workspace.jsに完全外部化し、単体開発用のdev.htmlを作成する

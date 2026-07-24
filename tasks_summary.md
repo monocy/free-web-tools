@@ -1,6 +1,7 @@
 # Tasks Summary
 
 ## 2026-07-24
+- [x] portal_calculator_standalone_dev_mode (完了)
 - [x] portal_audit_jpg_screenshots (完了)
 - [x] portal_calculator_unblock_fix (完了)
 - [x] portal_template_component_modularization (完了)
