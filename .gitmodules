@@ -13,6 +13,3 @@
 [submodule "assets/official/free_web_tools/tools/calculator"]
 	path = assets/official/free_web_tools/tools/calculator
 	url = https://github.com/monocy/tool-calculator.git
-[submodule "assets/official/free_web_tools/tools/big-text"]
-	path = assets/official/free_web_tools/tools/big-text
-	url = https://github.com/monocy/tool-bigtext.git

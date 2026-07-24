@@ -2,7 +2,7 @@
 
 ## Status
 
-`completed`
+`in_progress`
 
 ## Objective
 
@@ -17,11 +17,9 @@ Google Driveの「Webツール集_spark」のデータ（Webツール一覧.gshe
 ## Next actions
 
 1. Update the "big-text" tool (`assets/official/free_web_tools/tools/big-text`):
-   - Modify the layout so clicking the big text area toggles an editing window/panel that slides up or appears at the bottom.
-   - Implement "close-on-click-outside" behavior for this panel.
-   - Ensure the editing panel is inline scrollable when content overflows.
-   - Use a clear, native color picker for the text color settings (making it the primary color picker UI).
-   - Ensure these changes pass local smoke and verification tests. (COMPLETED)
+   - Remove the border, background (glass-panel), and shadow from the text display/showcase area so it looks like simple floating text.
+   - Maintain the toggle behavior (clicking the text area opens the editing panel, and clicking outside closes it).
+   - Ensure these changes pass local smoke and verification tests.
 
 ## Acceptance criteria
 
@@ -33,4 +31,5 @@ Google Driveの「Webツール集_spark」のデータ（Webツール一覧.gshe
 - [x] "Big Text" editing panel opens when clicking the big text area, and closes when clicking outside the panel.
 - [x] "Big Text" editing panel supports inline scrolling.
 - [x] Text color setting in "Big Text" utilizes a color picker UI.
-- [x] "Big Text" passes the local Playwright/smoke tests successfully.
+- [ ] "Big Text" showcase area has no border or background (transparent/simple style).
+- [ ] "Big Text" passes the local Playwright/smoke tests successfully.
